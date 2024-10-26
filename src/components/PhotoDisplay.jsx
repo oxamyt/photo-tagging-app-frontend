@@ -3,20 +3,26 @@ import Dropdown from "./common/Dropdown";
 
 function PhotoDisplay() {
   const [boxPosition, setBoxPosition] = useState(null);
+  const [showTargetingBox, setShowTargetingBox] = useState(false);
 
   const handleImageClick = (e) => {
-    const { clientX, clientY } = e;
-    const boxWidth = 100;
-    const boxHeight = 100;
+    if (!showTargetingBox) {
+      const { clientX, clientY } = e;
+      const boxWidth = 100;
+      const boxHeight = 100;
 
-    const imgRect = e.target.getBoundingClientRect();
-    const adjustedX = clientX - imgRect.left - boxWidth / 2;
-    const adjustedY = clientY - imgRect.top - boxHeight / 2;
+      const imgRect = e.target.getBoundingClientRect();
+      const adjustedX = clientX - imgRect.left - boxWidth / 2;
+      const adjustedY = clientY - imgRect.top - boxHeight / 2;
 
-    setBoxPosition({
-      x: adjustedX,
-      y: adjustedY,
-    });
+      setBoxPosition({
+        x: adjustedX,
+        y: adjustedY,
+      });
+      setShowTargetingBox(true);
+    } else {
+      setShowTargetingBox(false);
+    }
   };
 
   return (
@@ -27,7 +33,7 @@ function PhotoDisplay() {
         className="w-full h-auto cursor-pointer z-10"
         onClick={handleImageClick}
       />
-      {boxPosition && (
+      {showTargetingBox && (
         <>
           <div
             data-testid="targeting-box"

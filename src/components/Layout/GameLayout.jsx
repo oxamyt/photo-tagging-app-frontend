@@ -4,7 +4,7 @@ import Footer from "../Footer";
 
 function GameLayout() {
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen  bg-gray-50">
       <Header />
       <Outlet />
       <Footer />

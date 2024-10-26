@@ -30,4 +30,19 @@ describe("PhotoDisplay", () => {
     const dropdown = screen.getByTestId("dropdown");
     expect(dropdown).toBeInTheDocument();
   });
+
+  it("remove targeting-box on second click", () => {
+    render(<PhotoDisplay />);
+
+    const image = screen.getByAltText("game image");
+    fireEvent.click(image, { clientX: 100, clientY: 100 });
+
+    const targetingBox = screen.getByTestId("targeting-box");
+    expect(targetingBox).toBeInTheDocument();
+    expect(targetingBox.style.left).toBe("50px");
+    expect(targetingBox.style.top).toBe("50px");
+
+    fireEvent.click(image, { clientX: 300, clientY: 300 });
+    expect(targetingBox).not.toBeInTheDocument();
+  });
 });
