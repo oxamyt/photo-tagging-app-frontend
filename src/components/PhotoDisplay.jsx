@@ -23,7 +23,7 @@ function PhotoDisplay() {
       <img
         src="../../public/game-picture.jpg"
         alt="game image"
-        className="w-full h-full cursor-pointer z-10"
+        className="w-full h-auto cursor-pointer z-10"
         onClick={handleImageClick}
       />
       {boxPosition && (

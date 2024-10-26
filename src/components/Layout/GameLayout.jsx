@@ -1,8 +1,8 @@
 import { Outlet } from "react-router-dom";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
+import Header from "../Header";
+import Footer from "../Footer";
 
-function App() {
+function GameLayout() {
   return (
     <div className="min-h-screen bg-gray-50">
       <Header />
@@ -12,4 +12,4 @@ function App() {
   );
 }
 
-export default App;
+export default GameLayout;
