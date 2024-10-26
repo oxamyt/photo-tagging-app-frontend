@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Dropdown from "./common/Dropdown";
 
 function PhotoDisplay() {
   const [boxPosition, setBoxPosition] = useState(null);
@@ -27,16 +28,19 @@ function PhotoDisplay() {
         onClick={handleImageClick}
       />
       {boxPosition && (
-        <div
-          data-testid="targeting-box"
-          className="absolute border-2 rounded-full border-red-500"
-          style={{
-            left: boxPosition.x,
-            top: boxPosition.y,
-            width: `100px`,
-            height: `100px`,
-          }}
-        />
+        <>
+          <div
+            data-testid="targeting-box"
+            className="absolute border-2 rounded-full bg-opacity-30  bg-stone-100  border-stone-100 border-dashed"
+            style={{
+              left: boxPosition.x,
+              top: boxPosition.y,
+              width: `100px`,
+              height: `100px`,
+            }}
+          />
+          <Dropdown boxPosition={boxPosition} />
+        </>
       )}
     </div>
   );
