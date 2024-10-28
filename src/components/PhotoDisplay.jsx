@@ -1,9 +1,11 @@
 import { useState } from "react";
 import Dropdown from "./common/Dropdown";
+import { postCoordinatesRequest } from "../utils/api";
 
-function PhotoDisplay() {
+function PhotoDisplay({ sendCoordinates }) {
   const [boxPosition, setBoxPosition] = useState(null);
   const [showTargetingBox, setShowTargetingBox] = useState(false);
+  const [coordinates, setCoordinates] = useState(null);
 
   const handleImageClick = (e) => {
     if (!showTargetingBox) {
@@ -19,9 +21,26 @@ function PhotoDisplay() {
         x: adjustedX,
         y: adjustedY,
       });
+      setCoordinates({
+        x: adjustedX + 100,
+        y: adjustedY + 100,
+      });
       setShowTargetingBox(true);
     } else {
       setShowTargetingBox(false);
+    }
+  };
+
+  const handleCharacterClick = async (characterName) => {
+    try {
+      const response = await postCoordinatesRequest(coordinates, characterName);
+      if (response.success) {
+        console.log("Correct");
+      } else {
+        console.log("Incorrect");
+      }
+    } catch (err) {
+      console.error(err);
     }
   };
 
@@ -45,7 +64,10 @@ function PhotoDisplay() {
               height: `100px`,
             }}
           />
-          <Dropdown boxPosition={boxPosition} />
+          <Dropdown
+            handleCharacterClick={handleCharacterClick}
+            boxPosition={boxPosition}
+          />
         </>
       )}
     </div>

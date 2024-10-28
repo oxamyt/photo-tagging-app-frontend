@@ -1,6 +1,8 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, vi } from "vitest";
 import PhotoDisplay from "../components/PhotoDisplay.jsx";
+
+const mockSendCoordinates = vi.fn();
 
 describe("PhotoDisplay", () => {
   it("renders game picture", () => {
@@ -44,5 +46,23 @@ describe("PhotoDisplay", () => {
 
     fireEvent.click(image, { clientX: 300, clientY: 300 });
     expect(targetingBox).not.toBeInTheDocument();
+  });
+
+  it("sends coordinates to backend", async () => {
+    render(<PhotoDisplay sendCoordinates={mockSendCoordinates} />);
+
+    const image = screen.getByAltText("game image");
+
+    fireEvent.click(image, { clientX: 1315, clientY: 1837 });
+
+    const tomOption = screen.getByRole("listitem", { name: /Tom/i });
+
+    fireEvent.click(tomOption);
+
+    expect(mockSendCoordinates).toHaveBeenCalledWith(
+      { x: 1315, y: 1837 },
+      { character: "Tom" }
+    );
+    expect(mockSendCoordinates).toHaveBeenCalledTimes(1);
   });
 });

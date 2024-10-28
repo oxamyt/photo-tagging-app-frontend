@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 
-function Dropdown({ boxPosition }) {
+function Dropdown({ boxPosition, handleCharacterClick }) {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -25,7 +25,11 @@ function Dropdown({ boxPosition }) {
           isVisible ? "opacity-100" : "opacity-0"
         }`}
       >
-        <li className="text-2xl font-semibold text-yellow-400 hover:text-yellow-500 cursor-pointer transition duration-150 ">
+        <li
+          onClick={() => handleCharacterClick("Tom")}
+          aria-label="Tom"
+          className="text-2xl font-semibold text-yellow-400 hover:text-yellow-500 cursor-pointer transition duration-150 "
+        >
           Tom
         </li>
         <li className="text-2xl font-semibold text-yellow-400 hover:text-yellow-500 cursor-pointer transition duration-150 ">
@@ -43,4 +47,5 @@ export default Dropdown;
 
 Dropdown.propTypes = {
   boxPosition: PropTypes.object.isRequired,
+  handleCharacterClick: PropTypes.func.isRequired,
 };
