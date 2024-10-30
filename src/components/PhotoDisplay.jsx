@@ -6,6 +6,7 @@ function PhotoDisplay() {
   const [boxPosition, setBoxPosition] = useState(null);
   const [showTargetingBox, setShowTargetingBox] = useState(false);
   const [coordinates, setCoordinates] = useState(null);
+  const [successMarkPosition, setSuccessMarkPosition] = useState([]);
 
   const handleImageClick = (e) => {
     if (!showTargetingBox) {
@@ -46,7 +47,19 @@ function PhotoDisplay() {
     try {
       const response = await postCoordinatesRequest(coordinates, characterName);
       if (response.success) {
-        console.log("Correct");
+        const img = document.querySelector("img");
+        const imageRect = img.getBoundingClientRect();
+
+        const scaleX = imageRect.width / img.naturalWidth;
+        const scaleY = imageRect.height / img.naturalHeight;
+
+        const displayedX = response.correctCoordinates.x * scaleX;
+        const displayedY = response.correctCoordinates.y * scaleY;
+
+        setSuccessMarkPosition((prevMarks) => [
+          ...prevMarks,
+          { characterName, x: displayedX, y: displayedY },
+        ]);
       } else {
         console.log("Incorrect");
       }
@@ -81,6 +94,19 @@ function PhotoDisplay() {
           />
         </>
       )}
+      {successMarkPosition.map((mark, index) => (
+        <div
+          key={index}
+          className="absolute bg-red-500 rounded-full"
+          style={{
+            left: mark.x - 5,
+            top: mark.y - 5,
+            width: `10px`,
+            height: `10px`,
+          }}
+          title={mark.characterName}
+        />
+      ))}
     </div>
   );
 }
