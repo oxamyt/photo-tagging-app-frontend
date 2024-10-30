@@ -1,12 +1,14 @@
 import { useState } from "react";
 import Dropdown from "./common/Dropdown";
 import { postCoordinatesRequest } from "../utils/api";
+import { useOutletContext } from "react-router-dom";
 
 function PhotoDisplay() {
   const [boxPosition, setBoxPosition] = useState(null);
   const [showTargetingBox, setShowTargetingBox] = useState(false);
   const [coordinates, setCoordinates] = useState(null);
   const [successMarkPosition, setSuccessMarkPosition] = useState([]);
+  const [, setCharacters] = useOutletContext();
 
   const handleImageClick = (e) => {
     if (!showTargetingBox) {
@@ -60,8 +62,11 @@ function PhotoDisplay() {
           ...prevMarks,
           { characterName, x: displayedX, y: displayedY },
         ]);
-      } else {
-        console.log("Incorrect");
+        setCharacters((prevCharacters) =>
+          prevCharacters.map((char) =>
+            char.name === characterName ? { ...char, found: true } : char
+          )
+        );
       }
     } catch (err) {
       console.error(err);

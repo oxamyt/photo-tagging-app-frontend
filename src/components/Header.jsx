@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 
-function Header() {
+function Header({ characters }) {
   return (
     <header className="sticky top-0 z-20 max-w-full flex justify-between items-center bg-[#1e3a8a] p-6 shadow-md">
       <Link
@@ -10,16 +11,18 @@ function Header() {
         Photo Tagging App
       </Link>
       <section>
-        <ul className="flex justify-center items-center gap-3">
-          <li className="text-2xl font-semibold text-yellow-400 hover:text-yellow-500 cursor-pointer transition duration-150 ">
-            Tom
-          </li>
-          <li className="text-2xl font-semibold text-yellow-400 hover:text-yellow-500 cursor-pointer transition duration-150 ">
-            Tommy Vercetti
-          </li>
-          <li className="text-2xl font-semibold text-yellow-400 hover:text-yellow-500 cursor-pointer transition duration-150 ">
-            Patrick
-          </li>
+        <ul>
+          {characters.map((character) => (
+            <li
+              key={character.name}
+              style={{
+                color: character.found ? "green" : "yellow",
+              }}
+              aria-label={character.name}
+            >
+              {character.name}
+            </li>
+          ))}
         </ul>
       </section>
     </header>
@@ -27,3 +30,7 @@ function Header() {
 }
 
 export default Header;
+
+Header.propTypes = {
+  characters: PropTypes.array,
+};

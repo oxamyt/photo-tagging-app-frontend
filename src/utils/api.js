@@ -2,7 +2,6 @@ const API_URL = import.meta.env.VITE_API_URL;
 
 export async function postCoordinatesRequest(coordinates, characterName) {
   const { x, y } = coordinates;
-  console.log(coordinates);
   const data = { x, y, character: characterName.toUpperCase() };
   const response = await fetch(`${API_URL}/game`, {
     method: "POST",

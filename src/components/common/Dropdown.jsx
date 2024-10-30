@@ -1,8 +1,10 @@
 import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
+import { useOutletContext } from "react-router-dom";
 
 function Dropdown({ boxPosition, handleCharacterClick }) {
   const [isVisible, setIsVisible] = useState(false);
+  const [characters] = useOutletContext();
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -25,19 +27,16 @@ function Dropdown({ boxPosition, handleCharacterClick }) {
           isVisible ? "opacity-100" : "opacity-0"
         }`}
       >
-        <li
-          onClick={() => handleCharacterClick("Tom")}
-          aria-label="Tom"
-          className="text-2xl font-semibold text-yellow-400 hover:text-yellow-500 cursor-pointer transition duration-150 "
-        >
-          Tom
-        </li>
-        <li className="text-2xl font-semibold text-yellow-400 hover:text-yellow-500 cursor-pointer transition duration-150 ">
-          Tommy Vercetti
-        </li>
-        <li className="text-2xl font-semibold text-yellow-400 hover:text-yellow-500 cursor-pointer transition duration-150 ">
-          Patrick
-        </li>
+        {characters.map((character) => (
+          <li
+            key={character.name}
+            className="text-2xl font-semibold text-yellow-400 hover:text-yellow-500 cursor-pointer transition duration-150 "
+            onClick={() => handleCharacterClick(character.name)}
+            aria-label={character.name}
+          >
+            {character.name}
+          </li>
+        ))}
       </ul>
     </div>
   );
