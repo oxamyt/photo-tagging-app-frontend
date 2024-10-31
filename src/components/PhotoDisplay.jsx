@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { FaCheckCircle } from "react-icons/fa";
 import Dropdown from "./common/Dropdown";
 import { postCoordinatesRequest } from "../utils/api";
 import { useOutletContext } from "react-router-dom";
@@ -9,6 +10,8 @@ function PhotoDisplay() {
   const [coordinates, setCoordinates] = useState(null);
   const [successMarkPosition, setSuccessMarkPosition] = useState([]);
   const [, setCharacters] = useOutletContext();
+  const [showPopup, setShowPopup] = useState(false);
+  const [foundCharacter, setFoundCharacter] = useState(null);
 
   const handleImageClick = (e) => {
     if (!showTargetingBox) {
@@ -39,6 +42,7 @@ function PhotoDisplay() {
         x: naturalX,
         y: naturalY,
       });
+
       setShowTargetingBox(true);
     } else {
       setShowTargetingBox(false);
@@ -67,6 +71,15 @@ function PhotoDisplay() {
             char.name === characterName ? { ...char, found: true } : char
           )
         );
+        setFoundCharacter(characterName);
+        setShowPopup(true);
+
+        setTimeout(() => setShowPopup(false), 2000);
+        setTimeout(() => setFoundCharacter(null), 2000);
+      } else {
+        setFoundCharacter(null);
+        setShowPopup(true);
+        setTimeout(() => setShowPopup(false), 2000);
       }
     } catch (err) {
       console.error(err);
@@ -112,6 +125,22 @@ function PhotoDisplay() {
           title={mark.characterName}
         />
       ))}
+      {showPopup && (
+        <div
+          className={` w-fit fixed top-1/4 left-1/2 transform -translate-x-1/2 p-4 rounded-lg text-white ${
+            foundCharacter ? "bg-green-600" : "bg-red-500"
+          }`}
+        >
+          {foundCharacter ? (
+            <div className="flex items-center justify-center gap-2">
+              <FaCheckCircle className="text-white" />
+              <span>You found {foundCharacter}!</span>
+            </div>
+          ) : (
+            <span>Try again!</span>
+          )}
+        </div>
+      )}
     </div>
   );
 }

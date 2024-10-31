@@ -10,21 +10,23 @@ function Header({ characters }) {
       >
         Photo Tagging App
       </Link>
-      <section>
-        <ul>
-          {characters.map((character) => (
-            <li
-              key={character.name}
-              style={{
-                color: character.found ? "green" : "yellow",
-              }}
-              aria-label={character.name}
-            >
-              {character.name}
-            </li>
-          ))}
-        </ul>
-      </section>
+      {characters && (
+        <section>
+          <ul className="flex font-bold text-2xl gap-2 justify-center items-center">
+            {characters.map((character) => (
+              <li
+                key={character.name}
+                style={{
+                  color: character.found ? "green" : "yellow",
+                }}
+                aria-label={character.name}
+              >
+                {character.name}
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
     </header>
   );
 }
