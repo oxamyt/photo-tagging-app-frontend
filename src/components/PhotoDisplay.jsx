@@ -12,6 +12,7 @@ function PhotoDisplay() {
   const [, setCharacters] = useOutletContext();
   const [showPopup, setShowPopup] = useState(false);
   const [foundCharacter, setFoundCharacter] = useState(null);
+  const [gameOver, setGameOver] = useState(false);
 
   const handleImageClick = (e) => {
     if (!showTargetingBox) {
@@ -50,6 +51,7 @@ function PhotoDisplay() {
   };
 
   const handleCharacterClick = async (characterName) => {
+    setShowTargetingBox(false);
     try {
       const response = await postCoordinatesRequest(coordinates, characterName);
       if (response.success) {
@@ -66,11 +68,15 @@ function PhotoDisplay() {
           ...prevMarks,
           { characterName, x: displayedX, y: displayedY },
         ]);
-        setCharacters((prevCharacters) =>
-          prevCharacters.map((char) =>
+        setCharacters((prevCharacters) => {
+          const updatedCharacters = prevCharacters.map((char) =>
             char.name === characterName ? { ...char, found: true } : char
-          )
-        );
+          );
+
+          checkWin(updatedCharacters);
+
+          return updatedCharacters;
+        });
         setFoundCharacter(characterName);
         setShowPopup(true);
 
@@ -83,6 +89,20 @@ function PhotoDisplay() {
       }
     } catch (err) {
       console.error(err);
+    }
+  };
+
+  const checkWin = async (characters) => {
+    const allFound = characters.reduce(
+      (acc, character) => acc && character.found,
+      true
+    );
+
+    if (allFound) {
+      console.log("All characters found!");
+      setGameOver(true);
+    } else {
+      console.log("Not all characters are found yet.");
     }
   };
 
@@ -140,6 +160,15 @@ function PhotoDisplay() {
             <span>Try again!</span>
           )}
         </div>
+      )}
+      {gameOver && (
+        <>
+          <div className="fixed inset-0 bg-black opacity-50" />
+          <div className="w-fit fixed top-1/2 left-1/2 transform -translate-x-1/2 p-4 rounded-lg text-white bg-green-800 z-20">
+            <h2 className="text-lg text-center font-bold">Game Over</h2>
+            <p className="mt-2">You found all the characters!</p>
+          </div>
+        </>
       )}
     </div>
   );
