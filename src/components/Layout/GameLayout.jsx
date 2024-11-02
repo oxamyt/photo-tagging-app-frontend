@@ -12,7 +12,7 @@ function GameLayout() {
 
   return (
     <div className="min-h-screen  bg-gray-50">
-      <Header characters={characters} />
+      <Header characters={characters} renderTimer={true} />
       <Outlet context={[characters, setCharacters]} />
       <Footer />
     </div>

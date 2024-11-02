@@ -11,7 +11,9 @@ function Header({ characters }) {
       >
         Photo Tagging App
       </Link>
+
       <Timer />
+
       {characters && (
         <section>
           <ul className="flex font-bold text-2xl gap-2 justify-center items-center">

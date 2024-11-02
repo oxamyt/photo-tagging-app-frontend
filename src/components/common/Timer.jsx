@@ -1,43 +1,33 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
 function Timer() {
-  const [seconds, setSeconds] = useState(0);
-  const [minutes, setMinutes] = useState(0);
-  const [isRunning, setIsRunning] = useState(false);
+  const [time, setTime] = useState(0);
 
-  useEffect(() => {
-    let interval = null;
-    startTimer();
-
-    if (isRunning) {
-      interval = setInterval(() => {
-        setSeconds((prevSeconds) => {
-          if (prevSeconds === 59) {
-            setMinutes((prevMinutes) => prevMinutes + 1);
-            return 0;
-          }
-          return prevSeconds + 1;
-        });
-      }, 1000);
-    } else if (!isRunning && seconds !== 0) {
-      clearInterval(interval);
+  const handleTimer = () => {
+    if (!isRunning) {
+      clearInterval(intervalId);
     }
-
-    return () => clearInterval(interval);
-  }, [isRunning, seconds]);
-
-  const startTimer = () => {
-    setIsRunning(true);
+    const intervalId = setInterval(() => {
+      setTime((prevTime) => prevTime + 1);
+    }, 1000);
   };
 
-  return (
-    <div>
-      <p className="flex font-bold text-2xl text-yellow-300 gap-2 justify-center items-center">
-        Time: {minutes < 10 ? `0${minutes}` : minutes} :
-        {seconds < 10 ? `0${seconds}` : seconds}
+  const convertTime = () => {
+    const minutes = Math.floor(time / 60);
+    const seconds = time - minutes * 60;
+
+    return (
+      <p>
+        {" "}
+        {minutes > 10 ? minutes : `0${minutes}`}:
+        {seconds > 10 ? seconds : `0${seconds}`}{" "}
       </p>
-    </div>
-  );
+    );
+  };
+
+  useEffect(() => handleTimer, []);
+
+  return <div>{convertTime()}</div>;
 }
 
 export default Timer;
