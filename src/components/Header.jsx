@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import Timer from "./common/Timer";
 
-function Header({ characters }) {
+function Header({ characters, gameOver }) {
   return (
     <header className="sticky top-0 z-20 max-w-full flex justify-between items-center bg-[#1e3a8a] p-6 shadow-md">
       <Link
@@ -12,7 +12,7 @@ function Header({ characters }) {
         Photo Tagging App
       </Link>
 
-      <Timer />
+      <Timer gameOver={gameOver} />
 
       {characters && (
         <section>
@@ -39,4 +39,5 @@ export default Header;
 
 Header.propTypes = {
   characters: PropTypes.array,
+  gameOver: PropTypes.bool,
 };

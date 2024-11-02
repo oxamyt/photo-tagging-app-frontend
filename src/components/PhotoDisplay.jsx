@@ -9,10 +9,9 @@ function PhotoDisplay() {
   const [showTargetingBox, setShowTargetingBox] = useState(false);
   const [coordinates, setCoordinates] = useState(null);
   const [successMarkPosition, setSuccessMarkPosition] = useState([]);
-  const [, setCharacters] = useOutletContext();
+  const [, setCharacters, gameOver, setGameOver] = useOutletContext();
   const [showPopup, setShowPopup] = useState(false);
   const [foundCharacter, setFoundCharacter] = useState(null);
-  const [gameOver, setGameOver] = useState(false);
 
   const handleImageClick = (e) => {
     if (!showTargetingBox) {
