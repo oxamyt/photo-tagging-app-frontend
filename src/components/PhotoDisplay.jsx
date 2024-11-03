@@ -108,7 +108,7 @@ function PhotoDisplay() {
   return (
     <div className="relative">
       <img
-        src="../../public/game-picture.jpg"
+        src="/game-picture.jpg"
         alt="game image"
         className="cursor-pointer z-10"
         onClick={handleImageClick}
@@ -116,7 +116,6 @@ function PhotoDisplay() {
       {showTargetingBox && (
         <>
           <div
-            data-testid="targeting-box"
             className="absolute border-2 rounded-full bg-opacity-30 bg-stone-100 border-stone-100 border-dashed"
             style={{
               left: boxPosition.x - 50,
