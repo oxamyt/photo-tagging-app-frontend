@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FaCheckCircle } from "react-icons/fa";
 import Dropdown from "./common/Dropdown";
 import { postCoordinatesRequest } from "../utils/api";
 import { useOutletContext } from "react-router-dom";
+import { postStartTimerRequest } from "../utils/api";
 
 function PhotoDisplay() {
   const [boxPosition, setBoxPosition] = useState(null);
@@ -91,6 +92,12 @@ function PhotoDisplay() {
     }
   };
 
+  useEffect(() => {
+    if (!gameOver) {
+      postStartTimerRequest();
+    }
+  });
+
   const checkWin = async (characters) => {
     const allFound = characters.reduce(
       (acc, character) => acc && character.found,
@@ -98,10 +105,7 @@ function PhotoDisplay() {
     );
 
     if (allFound) {
-      console.log("All characters found!");
       setGameOver(true);
-    } else {
-      console.log("Not all characters are found yet.");
     }
   };
 

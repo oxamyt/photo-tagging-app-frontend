@@ -17,3 +17,35 @@ export async function postCoordinatesRequest(coordinates, characterName) {
 
   return await response.json();
 }
+
+export async function postStartTimerRequest() {
+  try {
+    const response = await fetch(`${API_URL}/timer/start`, {
+      method: "POST",
+      credentials: "same-origin",
+    });
+    if (!response.ok) {
+      let errorMessage = "Failed to start timer";
+
+      throw new Error(errorMessage);
+    }
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+export async function postStopTimerRequest() {
+  try {
+    const response = await fetch(`${API_URL}/timer/end`, {
+      method: "POST",
+      credentials: "same-origin",
+    });
+    if (!response.ok) {
+      let errorMessage = "Failed to stop timer";
+
+      throw new Error(errorMessage);
+    }
+  } catch (err) {
+    console.error(err);
+  }
+}
