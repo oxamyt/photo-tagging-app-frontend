@@ -12,10 +12,27 @@ function GameLayout() {
 
   const [gameOver, setGameOver] = useState(false);
 
+  const [time, setTime] = useState(0);
+
   return (
     <div className="min-h-screen  bg-gray-50">
-      <Header characters={characters} gameOver={gameOver} renderTimer={true} />
-      <Outlet context={[characters, setCharacters, gameOver, setGameOver]} />
+      <Header
+        time={time}
+        setTime={setTime}
+        characters={characters}
+        gameOver={gameOver}
+        renderTimer={true}
+      />
+      <Outlet
+        context={[
+          characters,
+          setCharacters,
+          gameOver,
+          setGameOver,
+          time,
+          setTime,
+        ]}
+      />
       <Footer />
     </div>
   );

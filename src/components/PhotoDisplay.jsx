@@ -7,6 +7,7 @@ import {
   postStopTimerRequest,
 } from "../utils/api";
 import { useOutletContext } from "react-router-dom";
+import LeaderboardForm from "./common/LeaderboardForm";
 
 function PhotoDisplay() {
   const [boxPosition, setBoxPosition] = useState(null);
@@ -176,10 +177,7 @@ function PhotoDisplay() {
       {gameOver && (
         <>
           <div className="fixed inset-0 bg-black opacity-50" />
-          <div className="w-fit fixed top-1/2 left-1/2 transform -translate-x-1/2 p-4 rounded-lg text-white bg-green-800 z-20">
-            <h2 className="text-lg text-center font-bold">Game Over</h2>
-            <p className="mt-2">You found all the characters!</p>
-          </div>
+          <LeaderboardForm />
         </>
       )}
     </div>

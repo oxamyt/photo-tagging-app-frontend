@@ -1,9 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import PropTypes from "prop-types";
 
-function Timer({ gameOver }) {
-  const [time, setTime] = useState(0);
-
+function Timer({ time, setTime, gameOver }) {
   const convertTime = () => {
     const minutes = Math.floor(time / 60);
     const seconds = time - minutes * 60;
@@ -33,6 +31,8 @@ function Timer({ gameOver }) {
 
 Timer.propTypes = {
   gameOver: PropTypes.bool,
+  time: PropTypes.number,
+  setTime: PropTypes.func,
 };
 
 export default Timer;

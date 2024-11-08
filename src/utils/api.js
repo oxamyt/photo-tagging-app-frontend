@@ -55,3 +55,26 @@ export async function postStopTimerRequest() {
     console.error(err);
   }
 }
+
+export async function postRecordTimer(data) {
+  try {
+    const response = await fetch(`${API_URL}/timer/record`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      credentials: "include",
+      body: JSON.stringify(data),
+    });
+    if (!response.ok) {
+      console.log(response.json());
+      let errorMessage = "Failed to record timer";
+
+      throw new Error(errorMessage);
+    }
+
+    const userInfo = await response.json();
+    console.log(userInfo);
+    return userInfo;
+  } catch (err) {
+    console.error(err);
+  }
+}
