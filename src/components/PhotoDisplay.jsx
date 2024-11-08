@@ -1,9 +1,12 @@
 import { useState, useEffect } from "react";
 import { FaCheckCircle } from "react-icons/fa";
 import Dropdown from "./common/Dropdown";
-import { postCoordinatesRequest } from "../utils/api";
+import {
+  postCoordinatesRequest,
+  postStartTimerRequest,
+  postStopTimerRequest,
+} from "../utils/api";
 import { useOutletContext } from "react-router-dom";
-import { postStartTimerRequest } from "../utils/api";
 
 function PhotoDisplay() {
   const [boxPosition, setBoxPosition] = useState(null);
@@ -93,10 +96,17 @@ function PhotoDisplay() {
   };
 
   useEffect(() => {
-    if (!gameOver) {
-      postStartTimerRequest();
-    }
-  });
+    const handleTimer = async () => {
+      if (!gameOver) {
+        await postStartTimerRequest();
+      } else {
+        const elapsedTime = await postStopTimerRequest();
+        console.log(elapsedTime);
+      }
+    };
+
+    handleTimer();
+  }, [gameOver]);
 
   const checkWin = async (characters) => {
     const allFound = characters.reduce(

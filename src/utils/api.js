@@ -6,6 +6,7 @@ export async function postCoordinatesRequest(coordinates, characterName) {
   const response = await fetch(`${API_URL}/game`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
+    credentials: "same-origin",
     body: JSON.stringify(data),
   });
 
@@ -22,7 +23,7 @@ export async function postStartTimerRequest() {
   try {
     const response = await fetch(`${API_URL}/timer/start`, {
       method: "POST",
-      credentials: "same-origin",
+      credentials: "include",
     });
     if (!response.ok) {
       let errorMessage = "Failed to start timer";
@@ -38,13 +39,18 @@ export async function postStopTimerRequest() {
   try {
     const response = await fetch(`${API_URL}/timer/end`, {
       method: "POST",
-      credentials: "same-origin",
+      credentials: "include",
     });
     if (!response.ok) {
+      console.log(response.json());
       let errorMessage = "Failed to stop timer";
 
       throw new Error(errorMessage);
     }
+
+    const time = await response.json();
+
+    return time;
   } catch (err) {
     console.error(err);
   }
