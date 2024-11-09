@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 function Homepage() {
   return (
-    <div className="w-full bg-[#f0f4f8] min-h-screen flex flex-col items-center justify-center">
+    <div className="w-full bg-[#f0f4f8] min-h-screen flex flex-col items-center justify-center ">
       <h1 className="text-4xl font-bold text-blue-900 mb-8">
         Welcome to the Photo Tagging App!
       </h1>

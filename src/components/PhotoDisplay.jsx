@@ -17,6 +17,7 @@ function PhotoDisplay() {
   const [, setCharacters, gameOver, setGameOver] = useOutletContext();
   const [showPopup, setShowPopup] = useState(false);
   const [foundCharacter, setFoundCharacter] = useState(null);
+  const [totalTime, setTotalTime] = useState(0);
 
   const handleImageClick = (e) => {
     if (!showTargetingBox) {
@@ -101,8 +102,9 @@ function PhotoDisplay() {
       if (!gameOver) {
         await postStartTimerRequest();
       } else {
-        const elapsedTime = await postStopTimerRequest();
-        console.log(elapsedTime);
+        const response = await postStopTimerRequest();
+        console.log(response);
+        setTotalTime(response.elapsedTime);
       }
     };
 
@@ -177,7 +179,7 @@ function PhotoDisplay() {
       {gameOver && (
         <>
           <div className="fixed inset-0 bg-black opacity-50" />
-          <LeaderboardForm />
+          <LeaderboardForm totalTime={totalTime} />
         </>
       )}
     </div>

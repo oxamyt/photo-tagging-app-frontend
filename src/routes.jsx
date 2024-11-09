@@ -3,12 +3,16 @@ import { createBrowserRouter } from "react-router-dom";
 import PhotoDisplay from "./components/PhotoDisplay.jsx";
 import GameLayout from "./components/Layout/GameLayout.jsx";
 import Homepage from "./components/Homepage.jsx";
+import Leaderboard from "./components/Leaderboard.jsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
-    children: [{ index: true, element: <Homepage /> }],
+    children: [
+      { index: true, element: <Homepage /> },
+      { path: "/leaderboard", element: <Leaderboard /> },
+    ],
   },
   {
     path: "/game",

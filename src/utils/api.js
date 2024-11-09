@@ -78,3 +78,24 @@ export async function postRecordTimer(data) {
     console.error(err);
   }
 }
+
+export async function getLeaderboard() {
+  try {
+    const response = await fetch(`${API_URL}/leaderboard`, {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+      credentials: "include",
+    });
+    if (!response.ok) {
+      console.log(response.json());
+      let errorMessage = "Failed to fetch leaderboard";
+
+      throw new Error(errorMessage);
+    }
+
+    const users = await response.json();
+    return users;
+  } catch (err) {
+    console.error(err);
+  }
+}
