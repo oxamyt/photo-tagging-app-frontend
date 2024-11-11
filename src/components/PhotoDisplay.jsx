@@ -5,6 +5,7 @@ import {
   postCoordinatesRequest,
   postStartTimerRequest,
   postStopTimerRequest,
+  getGameData,
 } from "../utils/api";
 import { useOutletContext } from "react-router-dom";
 import LeaderboardForm from "./common/LeaderboardForm";
@@ -14,10 +15,30 @@ function PhotoDisplay() {
   const [showTargetingBox, setShowTargetingBox] = useState(false);
   const [coordinates, setCoordinates] = useState(null);
   const [successMarkPosition, setSuccessMarkPosition] = useState([]);
-  const [, setCharacters, gameOver, setGameOver] = useOutletContext();
+  const [characters, setCharacters, gameOver, setGameOver, time, setTime] =
+    useOutletContext();
   const [showPopup, setShowPopup] = useState(false);
   const [foundCharacter, setFoundCharacter] = useState(null);
-  const [totalTime, setTotalTime] = useState(0);
+  const [totalTime, setTotalTime] = useState(null);
+  const [image, setImage] = useState(null);
+
+  useEffect(() => {
+    const fetchDataAndStartTimer = async () => {
+      try {
+        const gameData = await getGameData();
+        setCharacters(gameData.characters);
+        setImage(gameData.image);
+
+        if (!gameOver) {
+          await postStartTimerRequest();
+        }
+      } catch (error) {
+        console.error("Error fetching game data:", error);
+      }
+    };
+
+    fetchDataAndStartTimer();
+  }, [gameOver, setCharacters]);
 
   const handleImageClick = (e) => {
     if (!showTargetingBox) {
@@ -97,20 +118,6 @@ function PhotoDisplay() {
     }
   };
 
-  useEffect(() => {
-    const handleTimer = async () => {
-      if (!gameOver) {
-        await postStartTimerRequest();
-      } else {
-        const response = await postStopTimerRequest();
-        console.log(response);
-        setTotalTime(response.elapsedTime);
-      }
-    };
-
-    handleTimer();
-  }, [gameOver]);
-
   const checkWin = async (characters) => {
     const allFound = characters.reduce(
       (acc, character) => acc && character.found,
@@ -119,13 +126,16 @@ function PhotoDisplay() {
 
     if (allFound) {
       setGameOver(true);
+      const response = await postStopTimerRequest();
+      console.log(response);
+      setTotalTime(response.elapsedTime);
     }
   };
 
   return (
     <div className="relative">
       <img
-        src="/game-picture.jpg"
+        src={image}
         alt="game image"
         className="cursor-pointer z-10"
         onClick={handleImageClick}

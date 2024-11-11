@@ -42,7 +42,6 @@ export async function postStopTimerRequest() {
       credentials: "include",
     });
     if (!response.ok) {
-      console.log(response.json());
       let errorMessage = "Failed to stop timer";
 
       throw new Error(errorMessage);
@@ -65,14 +64,13 @@ export async function postRecordTimer(data) {
       body: JSON.stringify(data),
     });
     if (!response.ok) {
-      console.log(response.json());
       let errorMessage = "Failed to record timer";
 
       throw new Error(errorMessage);
     }
 
     const userInfo = await response.json();
-    console.log(userInfo);
+
     return userInfo;
   } catch (err) {
     console.error(err);
@@ -87,7 +85,6 @@ export async function getLeaderboard() {
       credentials: "include",
     });
     if (!response.ok) {
-      console.log(response.json());
       let errorMessage = "Failed to fetch leaderboard";
 
       throw new Error(errorMessage);
@@ -95,6 +92,26 @@ export async function getLeaderboard() {
 
     const users = await response.json();
     return users;
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+export async function getGameData() {
+  try {
+    const response = await fetch(`${API_URL}/game-data`, {
+      method: "GET",
+      credentials: "include",
+    });
+    if (!response.ok) {
+      let errorMessage = "Failed to fetch game data";
+
+      throw new Error(errorMessage);
+    }
+
+    const gameData = await response.json();
+
+    return gameData;
   } catch (err) {
     console.error(err);
   }

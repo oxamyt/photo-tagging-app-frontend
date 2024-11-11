@@ -4,11 +4,7 @@ import Footer from "../Footer";
 import { useState } from "react";
 
 function GameLayout() {
-  const [characters, setCharacters] = useState([
-    { name: "Tom", found: false },
-    { name: "Tommy Vercetti", found: false },
-    { name: "Patrick", found: false },
-  ]);
+  const [characters, setCharacters] = useState();
 
   const [gameOver, setGameOver] = useState(false);
 
