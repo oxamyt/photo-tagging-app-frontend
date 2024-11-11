@@ -15,8 +15,15 @@ function PhotoDisplay() {
   const [showTargetingBox, setShowTargetingBox] = useState(false);
   const [coordinates, setCoordinates] = useState(null);
   const [successMarkPosition, setSuccessMarkPosition] = useState([]);
-  const [characters, setCharacters, gameOver, setGameOver, time, setTime] =
-    useOutletContext();
+  const [
+    characters,
+    setCharacters,
+    gameOver,
+    setGameOver,
+    time,
+    setTime,
+    setGameStarted,
+  ] = useOutletContext();
   const [showPopup, setShowPopup] = useState(false);
   const [foundCharacter, setFoundCharacter] = useState(null);
   const [totalTime, setTotalTime] = useState(null);
@@ -32,13 +39,14 @@ function PhotoDisplay() {
         if (!gameOver) {
           await postStartTimerRequest();
         }
+        setGameStarted(true);
       } catch (error) {
         console.error("Error fetching game data:", error);
       }
     };
 
     fetchDataAndStartTimer();
-  }, [gameOver, setCharacters]);
+  }, [gameOver, setCharacters, setGameStarted]);
 
   const handleImageClick = (e) => {
     if (!showTargetingBox) {

@@ -8,6 +8,8 @@ function GameLayout() {
 
   const [gameOver, setGameOver] = useState(false);
 
+  const [gameStarted, setGameStarted] = useState(false);
+
   const [time, setTime] = useState(0);
 
   return (
@@ -18,6 +20,7 @@ function GameLayout() {
         characters={characters}
         gameOver={gameOver}
         renderTimer={true}
+        gameStarted={gameStarted}
       />
       <Outlet
         context={[
@@ -27,6 +30,7 @@ function GameLayout() {
           setGameOver,
           time,
           setTime,
+          setGameStarted,
         ]}
       />
       <Footer />

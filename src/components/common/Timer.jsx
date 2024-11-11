@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import PropTypes from "prop-types";
 
-function Timer({ time, setTime, gameOver }) {
+function Timer({ gameStarted, time, setTime, gameOver }) {
   const convertTime = () => {
     const minutes = Math.floor(time / 60000);
     const seconds = Math.floor((time % 60000) / 1000);
@@ -17,7 +17,7 @@ function Timer({ time, setTime, gameOver }) {
   };
 
   useEffect(() => {
-    if (!gameOver) {
+    if (gameStarted && !gameOver) {
       const intervalId = setInterval(() => {
         setTime((prevTime) => prevTime + 10);
       }, 10);
@@ -26,7 +26,7 @@ function Timer({ time, setTime, gameOver }) {
         clearInterval(intervalId);
       };
     }
-  }, [gameOver, setTime]);
+  }, [gameStarted, setTime, gameOver]);
 
   return <div>{convertTime()}</div>;
 }
@@ -35,6 +35,7 @@ Timer.propTypes = {
   gameOver: PropTypes.bool,
   time: PropTypes.number.isRequired,
   setTime: PropTypes.func.isRequired,
+  gameStarted: PropTypes.boolean,
 };
 
 export default Timer;
