@@ -28,14 +28,14 @@ function Timer({ gameStarted, time, setTime, gameOver }) {
     }
   }, [gameStarted, setTime, gameOver]);
 
-  return <div>{convertTime()}</div>;
+  return <div className=" w-64 ">{convertTime()}</div>;
 }
 
 Timer.propTypes = {
   gameOver: PropTypes.bool,
   time: PropTypes.number.isRequired,
   setTime: PropTypes.func.isRequired,
-  gameStarted: PropTypes.boolean,
+  gameStarted: PropTypes.bool,
 };
 
 export default Timer;

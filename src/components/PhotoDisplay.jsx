@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { FaCheckCircle } from "react-icons/fa";
 import Dropdown from "./common/Dropdown";
 import {
@@ -142,6 +143,11 @@ function PhotoDisplay() {
 
   return (
     <div className="relative">
+      {!image && (
+        <div className="flex items-center justify-center w-full h-screen">
+          <AiOutlineLoading3Quarters className="animate-spin h-12 w-12 text-gray-500" />
+        </div>
+      )}
       <img
         src={image}
         alt="game image"

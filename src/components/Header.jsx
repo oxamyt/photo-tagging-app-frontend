@@ -19,13 +19,20 @@ function Header({
         Photo Tagging App
       </Link>
 
-      {renderTimer && (
+      {renderTimer ? (
         <Timer
           gameStarted={gameStarted}
           time={time}
           setTime={setTime}
           gameOver={gameOver}
         />
+      ) : (
+        <Link
+          to={"/leaderboard"}
+          className="text-3xl font-bold text-yellow-300 hover:text-yellow-400 transition duration-300"
+        >
+          Leaderboard
+        </Link>
       )}
 
       {characters && (
@@ -55,7 +62,7 @@ Header.propTypes = {
   renderTimer: PropTypes.bool,
   time: PropTypes.number,
   setTime: PropTypes.func,
-  gameStarted: PropTypes.boolean,
+  gameStarted: PropTypes.bool,
 };
 
 export default Header;
