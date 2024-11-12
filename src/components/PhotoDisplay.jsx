@@ -10,7 +10,10 @@ import {
 } from "../utils/api";
 import { useOutletContext } from "react-router-dom";
 import LeaderboardForm from "./common/LeaderboardForm";
-import calculateCoordinates from "../utils/calculateCoordinates";
+import {
+  calculateCoordinates,
+  calculateMark,
+} from "../utils/calculateCoordinates";
 
 function PhotoDisplay() {
   const [gameState, setGameState] = useState({
@@ -93,12 +96,12 @@ function PhotoDisplay() {
 
       if (response.success) {
         const img = document.querySelector("img");
-        const imageRect = img.getBoundingClientRect();
-        const scaleX = imageRect.width / img.naturalWidth;
-        const scaleY = imageRect.height / img.naturalHeight;
 
-        const displayedX = response.correctCoordinates.x * scaleX;
-        const displayedY = response.correctCoordinates.y * scaleY;
+        const { displayedX, displayedY } = calculateMark(
+          img,
+          response.correctCoordinates.x,
+          response.correctCoordinates.y
+        );
 
         setGameState((prevState) => ({
           ...prevState,

@@ -1,4 +1,4 @@
-const calculateCoordinates = (img, e) => {
+export const calculateCoordinates = (img, e) => {
   const imageRect = img.getBoundingClientRect();
   const { clientX, clientY } = e;
 
@@ -16,4 +16,13 @@ const calculateCoordinates = (img, e) => {
   return { naturalX, naturalY, relativeX, relativeY };
 };
 
-export default calculateCoordinates;
+export const calculateMark = (img, x, y) => {
+  const imageRect = img.getBoundingClientRect();
+  const scaleX = imageRect.width / img.naturalWidth;
+  const scaleY = imageRect.height / img.naturalHeight;
+
+  const displayedX = x * scaleX;
+  const displayedY = y * scaleY;
+
+  return { displayedX, displayedY };
+};
