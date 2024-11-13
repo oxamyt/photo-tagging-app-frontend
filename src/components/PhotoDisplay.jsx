@@ -153,7 +153,7 @@ function PhotoDisplay() {
 
     if (allFound) {
       setGameOver(true);
-      const response = await postStopTimerRequest();
+      const response = await postStopTimerRequest(time);
 
       setGameState((prevState) => ({
         ...prevState,

@@ -35,11 +35,14 @@ export async function postStartTimerRequest() {
   }
 }
 
-export async function postStopTimerRequest() {
+export async function postStopTimerRequest(clientEndTime) {
   try {
+    const data = { clientEndTime };
     const response = await fetch(`${API_URL}/timer/end`, {
       method: "POST",
+      headers: { "Content-Type": "application/json" },
       credentials: "include",
+      body: JSON.stringify(data),
     });
     if (!response.ok) {
       let errorMessage = "Failed to stop timer";
