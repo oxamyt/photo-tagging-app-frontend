@@ -15,7 +15,6 @@ function Dropdown({ boxPosition, handleCharacterClick }) {
 
   return (
     <div
-      data-testid="dropdown"
       className="absolute bg-blue-900 bg-opacity-90 rounded-lg shadow-lg z-10"
       style={{
         left: boxPosition.x >= 1600 ? boxPosition.x - 260 : boxPosition.x + 50,

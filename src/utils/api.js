@@ -60,7 +60,7 @@ export async function postStopTimerRequest(clientEndTime) {
 
 export async function postRecordTimer(data) {
   try {
-    const response = await fetch(`${API_URL}/timer/record`, {
+    const response = await fetch(`${API_URL}/leaderboard`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       credentials: "include",

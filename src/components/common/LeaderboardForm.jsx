@@ -13,8 +13,7 @@ function LeaderboardForm({ totalTime }) {
     const data = { username };
 
     try {
-      const responseData = await postRecordTimer(data);
-      console.log(responseData);
+      await postRecordTimer(data);
 
       navigate("/leaderboard");
     } catch (err) {
