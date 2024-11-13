@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { getLeaderboard } from "../utils/api";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
 function Leaderboard() {
   const [leaderboardData, setLeaderboardData] = useState(null);
@@ -25,7 +26,11 @@ function Leaderboard() {
     <div className="w-full bg-[#f0f4f8] min-h-screen flex flex-col items-center justify-center p-6">
       <h1 className="text-3xl font-bold text-gray-800 mb-6">Leaderboard</h1>
 
-      {loading && <p className="text-lg text-gray-600">Loading...</p>}
+      {loading && (
+        <div className="flex items-center justify-center w-full h-screen">
+          <AiOutlineLoading3Quarters className="animate-spin h-12 w-12 text-gray-500" />
+        </div>
+      )}
 
       {error && <p className="text-lg text-red-600">{error}</p>}
 
