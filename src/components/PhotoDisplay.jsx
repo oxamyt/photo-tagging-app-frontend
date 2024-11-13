@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import { FaMapMarker } from "react-icons/fa";
 import { FaCheckCircle } from "react-icons/fa";
 import Dropdown from "./common/Dropdown";
 import {
@@ -37,27 +38,27 @@ function PhotoDisplay() {
     setGameStarted,
   ] = useOutletContext();
 
-  const fetchGameData = useCallback(async () => {
-    try {
-      const gameData = await getGameData();
-      setCharacters(gameData.characters);
-      setGameState((prev) => ({
-        ...prev,
-        image: gameData.image,
-      }));
-
-      if (!gameOver) {
-        await postStartTimerRequest();
-      }
-      setGameStarted(true);
-    } catch (error) {
-      console.error("Error fetching game data:", error);
-    }
-  }, [gameOver, setCharacters, setGameStarted]);
-
   useEffect(() => {
+    const fetchGameData = async () => {
+      try {
+        const gameData = await getGameData();
+        setCharacters(gameData.characters);
+        setGameState((prev) => ({
+          ...prev,
+          image: gameData.image,
+        }));
+
+        if (!gameOver) {
+          await postStartTimerRequest();
+        }
+        setGameStarted(true);
+      } catch (error) {
+        console.error("Error fetching game data:", error);
+      }
+    };
+
     fetchGameData();
-  }, [fetchGameData]);
+  }, []);
 
   const handleImageClick = (e) => {
     if (!gameState.showTargetingBox) {
@@ -162,70 +163,73 @@ function PhotoDisplay() {
   };
 
   return (
-    <div className="relative">
-      {!gameState.image && (
-        <div className="flex items-center justify-center w-full h-screen">
-          <AiOutlineLoading3Quarters className="animate-spin h-12 w-12 text-gray-500" />
-        </div>
-      )}
-      <img
-        src={gameState.image}
-        alt="game image"
-        className="cursor-pointer z-10"
-        onClick={handleImageClick}
-      />
-      {gameState.showTargetingBox && (
-        <>
-          <div
-            className="absolute border-2 rounded-full bg-opacity-30 bg-stone-100 border-stone-100 border-dashed"
-            style={{
-              left: gameState.boxPosition.x - 50,
-              top: gameState.boxPosition.y - 50,
-              width: `100px`,
-              height: `100px`,
-            }}
-          />
-          <Dropdown
-            handleCharacterClick={handleCharacterClick}
-            boxPosition={gameState.boxPosition}
-          />
-        </>
-      )}
-      {gameState.successMarkPosition.map((mark, index) => (
-        <div
-          key={index}
-          className="absolute bg-red-500 rounded-full"
-          style={{
-            left: mark.x - 5,
-            top: mark.y - 5,
-            width: `10px`,
-            height: `10px`,
-          }}
-          title={mark.characterName}
+    <div className="flex justify-center items-center">
+      <div className="relative">
+        {!gameState.image && (
+          <div className="flex items-center justify-center w-full h-screen">
+            <AiOutlineLoading3Quarters className="animate-spin h-12 w-12 text-gray-500" />
+          </div>
+        )}
+        <img
+          src={gameState.image}
+          alt="game image"
+          className="cursor-pointer z-10"
+          onClick={handleImageClick}
         />
-      ))}
-      {gameState.showPopup && (
-        <div
-          className={`w-fit fixed top-1/4 left-1/2 transform -translate-x-1/2 p-4 rounded-lg text-white ${
-            gameState.foundCharacter ? "bg-green-600" : "bg-red-500"
-          }`}
-        >
-          {gameState.foundCharacter ? (
-            <div className="flex items-center justify-center gap-2">
-              <FaCheckCircle className="text-white" />
-              <span>You found {gameState.foundCharacter}!</span>
-            </div>
-          ) : (
-            <span>Try again!</span>
-          )}
-        </div>
-      )}
-      {gameOver && (
-        <>
-          <div className="fixed inset-0 bg-black opacity-50" />
-          <LeaderboardForm totalTime={gameState.totalTime} />
-        </>
-      )}
+        {gameState.showTargetingBox && (
+          <>
+            <div
+              className="absolute border-2 rounded-full bg-opacity-30 bg-stone-100 border-stone-100 border-dashed"
+              style={{
+                left: gameState.boxPosition.x - 50,
+                top: gameState.boxPosition.y - 50,
+                width: `100px`,
+                height: `100px`,
+              }}
+            />
+            <Dropdown
+              handleCharacterClick={handleCharacterClick}
+              boxPosition={gameState.boxPosition}
+            />
+          </>
+        )}
+        {gameState.successMarkPosition.map((mark, index) => (
+          <FaMapMarker
+            key={index}
+            className="absolute z-30"
+            style={{
+              left: mark.x - 5,
+              top: mark.y - 5,
+              width: `25px`,
+              height: `40px`,
+              color: "red",
+            }}
+            title={mark.characterName}
+          />
+        ))}
+        {gameState.showPopup && (
+          <div
+            className={`w-fit fixed top-1/4 left-1/2 transform -translate-x-1/2 p-4 rounded-lg text-white ${
+              gameState.foundCharacter ? "bg-green-600" : "bg-red-500"
+            }`}
+          >
+            {gameState.foundCharacter ? (
+              <div className="flex items-center justify-center gap-2">
+                <FaCheckCircle className="text-white" />
+                <span>You found {gameState.foundCharacter}!</span>
+              </div>
+            ) : (
+              <span>Try again!</span>
+            )}
+          </div>
+        )}
+        {gameOver && (
+          <>
+            <div className="fixed inset-0 bg-black opacity-50" />
+            <LeaderboardForm totalTime={gameState.totalTime} />
+          </>
+        )}
+      </div>
     </div>
   );
 }

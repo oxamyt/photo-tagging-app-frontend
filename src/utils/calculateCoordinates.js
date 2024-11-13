@@ -18,11 +18,11 @@ export const calculateCoordinates = (img, e) => {
 
 export const calculateMark = (img, x, y) => {
   const imageRect = img.getBoundingClientRect();
-  const scaleX = imageRect.width / img.naturalWidth;
-  const scaleY = imageRect.height / img.naturalHeight;
+  const scaleX = img.naturalWidth / imageRect.width;
+  const scaleY = img.naturalHeight / imageRect.height;
 
-  const displayedX = x * scaleX;
-  const displayedY = y * scaleY;
+  const displayedX = x / scaleX;
+  const displayedY = y / scaleY;
 
   return { displayedX, displayedY };
 };
