@@ -57,8 +57,16 @@ function Dropdown({ boxPosition, handleCharacterClick }) {
         {characters.map((character) => (
           <li
             key={character.name}
-            className="text-xs md:text-xl lg:text-2xl font-semibold text-yellow-400 hover:text-yellow-500 cursor-pointer transition duration-150 "
-            onClick={() => handleCharacterClick(character.name)}
+            className={`text-xs md:text-xl lg:text-2xl font-semibold  ${
+              character.found
+                ? "text-stone-600"
+                : "text-yellow-400 hover:text-yellow-500"
+            } cursor-pointer transition duration-150`}
+            onClick={
+              character.found
+                ? null
+                : () => handleCharacterClick(character.name)
+            }
             aria-label={character.name}
           >
             {character.name}
