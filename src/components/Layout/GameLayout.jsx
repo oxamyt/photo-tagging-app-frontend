@@ -13,7 +13,7 @@ function GameLayout() {
   const [time, setTime] = useState(0);
 
   return (
-    <div className="min-h-screen  bg-gray-50">
+    <div className="min-h-screen bg-gray-50">
       <Header
         time={time}
         setTime={setTime}

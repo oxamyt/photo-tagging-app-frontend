@@ -163,17 +163,17 @@ function PhotoDisplay() {
   };
 
   return (
-    <div className="flex justify-center items-center">
+    <div className="w-full">
       <div className="relative">
         {!gameState.image && (
-          <div className="flex items-center justify-center w-full h-screen">
+          <div className=" justify-center w-full h-full">
             <AiOutlineLoading3Quarters className="animate-spin h-12 w-12 text-gray-500" />
           </div>
         )}
         <img
           src={gameState.image}
           alt="game image"
-          className="cursor-pointer z-10"
+          className="cursor-pointer w-screen h-auto z-10"
           onClick={handleImageClick}
         />
         {gameState.showTargetingBox && (

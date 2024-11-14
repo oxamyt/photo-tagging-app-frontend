@@ -11,11 +11,8 @@ function Header({
   renderTimer,
 }) {
   return (
-    <header className="sticky top-0 z-20 max-w-full flex justify-between items-center bg-[#1e3a8a] p-6 shadow-md">
-      <Link
-        to={"/"}
-        className="text-3xl font-bold text-yellow-300 hover:text-yellow-400 transition duration-300"
-      >
+    <header className="sticky top-0 z-20 max-w-full flex justify-between items-center text-[#d1d9e0] bg-[#1c1f26] p-6 shadow-md">
+      <Link to={"/"} className="text-3xl font-bold ">
         Photo Tagging App
       </Link>
 
@@ -27,10 +24,7 @@ function Header({
           gameOver={gameOver}
         />
       ) : (
-        <Link
-          to={"/leaderboard"}
-          className="text-3xl font-bold text-yellow-300 hover:text-yellow-400 transition duration-300"
-        >
+        <Link to={"/leaderboard"} className="text-3xl font-bold ">
           Leaderboard
         </Link>
       )}
