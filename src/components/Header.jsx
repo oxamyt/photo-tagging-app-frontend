@@ -11,8 +11,8 @@ function Header({
   renderTimer,
 }) {
   return (
-    <header className="sticky top-0 z-20 max-w-full flex justify-between items-center text-[#d1d9e0] bg-[#1c1f26] p-6 shadow-md">
-      <Link to={"/"} className="text-3xl font-bold ">
+    <header className="sticky top-0 z-20 text-xl lg:text-3xl max-w-full flex justify-between items-center text-[#d1d9e0] bg-[#1c1f26] p-6 shadow-md ">
+      <Link to={"/"} className="font-bold ">
         Photo Tagging App
       </Link>
 
@@ -24,14 +24,14 @@ function Header({
           gameOver={gameOver}
         />
       ) : (
-        <Link to={"/leaderboard"} className="text-3xl font-bold ">
+        <Link to={"/leaderboard"} className=" font-bold ">
           Leaderboard
         </Link>
       )}
 
       {characters && (
         <section>
-          <ul className="flex font-bold text-2xl gap-2 justify-center items-center">
+          <ul className="flex font-bold gap-2 justify-center items-center">
             {characters.map((character) => (
               <li
                 key={character.name}
