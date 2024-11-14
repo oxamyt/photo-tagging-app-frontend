@@ -166,8 +166,8 @@ function PhotoDisplay() {
     <div className="w-full">
       <div className="relative">
         {!gameState.image && (
-          <div className=" justify-center w-full h-full">
-            <AiOutlineLoading3Quarters className="animate-spin h-12 w-12 text-gray-500" />
+          <div className="flex items-center justify-center w-screen h-screen ">
+            <AiOutlineLoading3Quarters className="animate-spin h-16 w-16 text-gray-500" />
           </div>
         )}
         <img
@@ -181,10 +181,12 @@ function PhotoDisplay() {
             <div
               className="absolute border-2 rounded-full bg-opacity-30 bg-stone-100 border-stone-100 border-dashed"
               style={{
-                left: gameState.boxPosition.x - 50,
-                top: gameState.boxPosition.y - 50,
-                width: `100px`,
-                height: `100px`,
+                left:
+                  gameState.boxPosition.x - (window.innerWidth < 768 ? 10 : 50),
+                top:
+                  gameState.boxPosition.y - (window.innerWidth < 768 ? 10 : 50),
+                width: window.innerWidth < 768 ? `30px` : `100px`,
+                height: window.innerWidth < 768 ? `30px` : `100px`,
               }}
             />
             <Dropdown
@@ -201,7 +203,7 @@ function PhotoDisplay() {
               left: mark.x - 5,
               top: mark.y - 5,
               width: `25px`,
-              height: `40px`,
+              height: `25px`,
               color: "red",
             }}
             title={mark.characterName}
