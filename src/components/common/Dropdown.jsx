@@ -43,7 +43,7 @@ function Dropdown({ boxPosition, handleCharacterClick }) {
 
   return (
     <div
-      className="absolute bg-[#181a1f] bg-opacity-90 rounded-lg shadow-lg z-10"
+      className="absolute bg-lightBg dark:bg-darkBg bg-opacity-90 rounded-lg shadow-lg z-10"
       style={{
         left: position.left,
         top: position.top,
@@ -60,7 +60,7 @@ function Dropdown({ boxPosition, handleCharacterClick }) {
             className={`text-xs md:text-xl lg:text-2xl font-semibold  ${
               character.found
                 ? "text-stone-600"
-                : "text-yellow-400 hover:text-yellow-500"
+                : "text-yellow-500 dark:text-yellow-300"
             } cursor-pointer transition duration-150`}
             onClick={
               character.found

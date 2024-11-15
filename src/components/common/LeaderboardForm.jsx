@@ -23,7 +23,7 @@ function LeaderboardForm({ totalTime }) {
 
   return (
     <form
-      className="flex flex-col z-100 items-center w-full max-w-md fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-6 rounded-xl shadow-lg bg-green-800 text-white z-20 space-y-4"
+      className="flex flex-col transition duration-300 z-100 items-center w-full max-w-md fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-6 rounded-xl shadow-lg bg-lightBg text-black dark:bg-darkBg dark:text-white z-20 space-y-4"
       onSubmit={handleSubmit}
     >
       <h1 className="text-xl font-semibold text-center">
@@ -36,13 +36,13 @@ function LeaderboardForm({ totalTime }) {
           type="text"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
-          className="mt-2 w-full p-2 border-2 border-gray-300 rounded-md text-black"
+          className="mt-2 w-full p-2 border-2 border-gray-300 rounded-md text-black "
           required
         />
       </label>
       <button
         type="submit"
-        className="w-full p-2 bg-blue-600 hover:bg-blue-700 focus:bg-[#3f7de0] text-white rounded-lg font-semibold mt-4"
+        className="w-full p-2 bg-darkBg text-white dark:bg-lightBg dark:text-black rounded-lg font-semibold mt-4"
       >
         Submit
       </button>

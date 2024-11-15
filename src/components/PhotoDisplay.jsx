@@ -163,7 +163,7 @@ function PhotoDisplay() {
   };
 
   return (
-    <div className="w-full">
+    <main className="w-full">
       <div className="relative">
         {!gameState.image && (
           <div className="flex items-center justify-center w-screen h-screen ">
@@ -232,7 +232,7 @@ function PhotoDisplay() {
           </>
         )}
       </div>
-    </div>
+    </main>
   );
 }
 

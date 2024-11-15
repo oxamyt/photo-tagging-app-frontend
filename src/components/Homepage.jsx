@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 function Homepage() {
   return (
-    <div className="w-full bg-lightBg grow dark:bg-[#181a1f]  flex flex-col items-center justify-center transition duration-300">
+    <main className="w-full bg-lightBg grow dark:bg-[#181a1f]  flex flex-col items-center justify-center transition duration-300">
       <h1 className="text-black dark:text-white  text-3xl lg:text-4xl font-bold text-center  mb-8">
         Welcome to the SpotQuest!
       </h1>
@@ -12,7 +12,7 @@ function Homepage() {
       >
         Play Game
       </Link>
-    </div>
+    </main>
   );
 }
 

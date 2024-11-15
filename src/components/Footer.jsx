@@ -6,7 +6,7 @@ function Footer() {
       <a
         target="_blank"
         rel="noopener noreferrer"
-        className="flex gap-3 items-center text-xl font-bold hover:text-yellow-300 transition duration-300"
+        className="flex gap-3 items-center text-xl font-bold hover:text-yellow-500 hover:dark:text-yellow-300 transition duration-300"
         href="https://github.com/oxamyt"
       >
         Oxamyt

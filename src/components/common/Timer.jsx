@@ -8,7 +8,7 @@ function Timer({ gameStarted, time, setTime, gameOver }) {
     const milliseconds = time % 1000;
 
     return (
-      <p className="text-md lg:text-3xl font-bold text-yellow-300 ">
+      <p className="text-md lg:text-3xl font-bold text-yellow-500 dark:text-yellow-300 ">
         {minutes >= 10 ? minutes : `0${minutes}`}:
         {seconds >= 10 ? seconds : `0${seconds}`}:
         {milliseconds < 100 ? `0${milliseconds}` : milliseconds}

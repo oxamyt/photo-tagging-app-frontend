@@ -4,6 +4,7 @@ import Timer from "./common/Timer";
 import { useState } from "react";
 import { MdLightMode } from "react-icons/md";
 import { useTheme } from "./contexts/ThemeContext";
+import { FaMoon } from "react-icons/fa";
 function Header({
   gameStarted,
   time,
@@ -19,19 +20,27 @@ function Header({
   const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
 
   return (
-    <header className="sticky top-0 z-20 bg-lightBg dark:bg-[#1c1f26] text-xl lg:text-3xl max-w-full flex justify-between items-center text-black dark:text-white  transition duration-300  p-6 shadow-md">
-      <MdLightMode
-        onClick={toggleTheme}
-        className="p-2 rounded  w-10 h-10 cursor-pointer dark:text-gray-100"
-      />
+    <header className="sticky top-0 z-20 bg-lightBg dark:bg-[#1c1f26] text-xl lg:text-3xl max-w-full gap-3 flex justify-between items-center text-black dark:text-white  transition duration-300  p-6 shadow-md">
+      <div className="flex justify-center items-center gap-5">
+        {theme === "dark" ? (
+          <FaMoon
+            onClick={toggleTheme}
+            className="select-none rounded  w-8 h-8 lg:w-10 lg:h-10 cursor-pointer dark:text-gray-100 hover:scale-125 duration-300 "
+          />
+        ) : (
+          <MdLightMode
+            onClick={toggleTheme}
+            className="select-none rounded  w-8 h-8  lg:w-10 lg:h-10 cursor-pointer dark:text-gray-100 hover:scale-125 duration-300 "
+          />
+        )}
 
-      <Link
-        to={"/"}
-        className="font-bold hover:text-yellow-300 transition duration-300"
-      >
-        SpotQuest
-      </Link>
-
+        <Link
+          to={"/"}
+          className="font-bold hover:text-yellow-300 transition duration-300"
+        >
+          SpotQuest
+        </Link>
+      </div>
       {renderTimer ? (
         <Timer
           gameStarted={gameStarted}
@@ -52,7 +61,14 @@ function Header({
         <section className="relative">
           <button
             onClick={toggleDropdown}
-            className="lg:hidden font-bold bg-gray-800 text-white hover:text-black hover:bg-stone-100 transition duration-300  py-2 px-4 rounded-md"
+            className="lg:hidden select-none md:hidden font-bold bg-[#3a8dff] text-white   transition duration-300  py-2 px-4 rounded-full"
+          >
+            3
+          </button>
+
+          <button
+            onClick={toggleDropdown}
+            className="lg:hidden hidden md:flex border-2 border-darkBg dark:border-lightBg font-bold bg-lightBg text-black dark:bg-darkBg dark:text-white transition duration-300  py-2 px-4 rounded-md"
           >
             Characters
           </button>
@@ -60,13 +76,13 @@ function Header({
           <ul
             className={`${
               isDropdownOpen ? "block" : "hidden"
-            } absolute right-0 mt-2 py-2 w-48 bg-gray-800 text-white rounded-lg shadow-lg lg:hidden`}
+            } absolute right-0 mt-2 py-2 w-48 bg-lightBg  text-black dark:bg-darkBg dark:text-white rounded-lg shadow-lg lg:hidden`}
           >
             {characters.map((character) => (
               <li
                 key={character.name}
                 style={{
-                  color: character.found ? "green" : "yellow",
+                  color: character.found ? "green" : "",
                 }}
                 aria-label={character.name}
                 className="px-4 py-2"
@@ -76,12 +92,12 @@ function Header({
             ))}
           </ul>
 
-          <ul className="hidden lg:flex gap-2 font-bold">
+          <ul className="hidden lg:flex gap-2 font-bold text-yellow-500 dark:text-yellow-300 ">
             {characters.map((character) => (
               <li
                 key={character.name}
                 style={{
-                  color: character.found ? "green" : "yellow",
+                  color: character.found ? "green" : "",
                 }}
                 aria-label={character.name}
               >
