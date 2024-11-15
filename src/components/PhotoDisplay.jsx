@@ -198,12 +198,12 @@ function PhotoDisplay() {
         {gameState.successMarkPosition.map((mark, index) => (
           <FaMapMarker
             key={index}
-            className="absolute z-30"
+            className="absolute z-10"
             style={{
               left: mark.x - 5,
               top: mark.y - 5,
-              width: `25px`,
-              height: `25px`,
+              width: `1rem`,
+              height: `1rem`,
               color: "red",
             }}
             title={mark.characterName}

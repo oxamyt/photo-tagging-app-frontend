@@ -2,7 +2,8 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import Timer from "./common/Timer";
 import { useState } from "react";
-
+import { MdLightMode } from "react-icons/md";
+import { useTheme } from "./contexts/ThemeContext";
 function Header({
   gameStarted,
   time,
@@ -13,12 +14,22 @@ function Header({
 }) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
+  const { theme, toggleTheme } = useTheme();
+
   const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
 
   return (
-    <header className="sticky top-0 z-20 text-xl lg:text-3xl max-w-full flex justify-between items-center text-[#d1d9e0] bg-[#1c1f26] p-6 shadow-md">
-      <Link to={"/"} className="font-bold">
-        Photo Tagging App
+    <header className="sticky top-0 z-20 bg-lightBg dark:bg-[#1c1f26] text-xl lg:text-3xl max-w-full flex justify-between items-center text-black dark:text-white  transition duration-300  p-6 shadow-md">
+      <MdLightMode
+        onClick={toggleTheme}
+        className="p-2 rounded  w-10 h-10 cursor-pointer dark:text-gray-100"
+      />
+
+      <Link
+        to={"/"}
+        className="font-bold hover:text-yellow-300 transition duration-300"
+      >
+        SpotQuest
       </Link>
 
       {renderTimer ? (
@@ -29,7 +40,10 @@ function Header({
           gameOver={gameOver}
         />
       ) : (
-        <Link to={"/leaderboard"} className="font-bold">
+        <Link
+          to={"/leaderboard"}
+          className="font-bold hover:text-yellow-300 transition duration-300"
+        >
           Leaderboard
         </Link>
       )}
@@ -38,7 +52,7 @@ function Header({
         <section className="relative">
           <button
             onClick={toggleDropdown}
-            className="lg:hidden font-bold bg-gray-800 text-white py-2 px-4 rounded-md"
+            className="lg:hidden font-bold bg-gray-800 text-white hover:text-black hover:bg-stone-100 transition duration-300  py-2 px-4 rounded-md"
           >
             Characters
           </button>

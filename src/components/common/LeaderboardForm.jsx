@@ -42,7 +42,7 @@ function LeaderboardForm({ totalTime }) {
       </label>
       <button
         type="submit"
-        className="w-full p-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold mt-4"
+        className="w-full p-2 bg-blue-600 hover:bg-blue-700 focus:bg-[#3f7de0] text-white rounded-lg font-semibold mt-4"
       >
         Submit
       </button>
