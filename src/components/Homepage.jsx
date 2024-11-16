@@ -8,7 +8,7 @@ function Homepage() {
       </h1>
       <Link
         to={"/game"}
-        className="text-2xl font-semibold text-[#f0f4f8] bg-[#3a8dff] hover:bg-[#306bcb] focus:bg-[#295292] px-8 py-4 rounded-full shadow-lg transition duration-300"
+        className="text-2xl font-semibold text-white bg-yellow-500 dark:bg-yellow-300 dark:text-black hover:bg-yellow-400 hover:dark:bg-yellow-200  px-8 py-4 rounded-full shadow-lg transition duration-300"
       >
         Play Game
       </Link>

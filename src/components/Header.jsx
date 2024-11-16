@@ -36,7 +36,7 @@ function Header({
 
         <Link
           to={"/"}
-          className="font-bold hover:text-yellow-300 transition duration-300"
+          className="font-bold  hover:text-yellow-500 hover:dark:text-yellow-300 transition duration-300"
         >
           SpotQuest
         </Link>
@@ -61,7 +61,7 @@ function Header({
         <section className="relative">
           <button
             onClick={toggleDropdown}
-            className="lg:hidden select-none md:hidden font-bold bg-[#3a8dff] text-white   transition duration-300  py-2 px-4 rounded-full"
+            className="lg:hidden select-none md:hidden font-bold bg-yellow-500 dark:bg-yellow-300 text-black  transition duration-300  py-2 px-4 rounded-full"
           >
             3
           </button>
