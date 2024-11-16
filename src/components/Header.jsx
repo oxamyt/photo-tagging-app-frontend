@@ -5,6 +5,7 @@ import { useState } from "react";
 import { MdLightMode } from "react-icons/md";
 import { useTheme } from "./contexts/ThemeContext";
 import { FaMoon } from "react-icons/fa";
+
 function Header({
   gameStarted,
   time,
@@ -14,7 +15,6 @@ function Header({
   renderTimer,
 }) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-
   const { theme, toggleTheme } = useTheme();
 
   const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
@@ -42,6 +42,7 @@ function Header({
           <span className="text-yellow-500 dark:text-yellow-300">t</span>
         </Link>
       </div>
+
       {renderTimer ? (
         <Timer
           gameStarted={gameStarted}
@@ -62,14 +63,14 @@ function Header({
         <section className="relative">
           <button
             onClick={toggleDropdown}
-            className="lg:hidden select-none md:hidden font-bold bg-yellow-500 dark:bg-yellow-300 text-black  transition duration-300  py-2 px-4 rounded-full"
+            className="lg:hidden select-none md:hidden font-bold bg-yellow-500 dark:bg-yellow-300 text-black transition duration-300 py-2 px-4 rounded-full"
           >
             3
           </button>
 
           <button
             onClick={toggleDropdown}
-            className="lg:hidden hidden md:flex border-2 border-darkBg dark:border-lightBg font-bold bg-lightBg text-black dark:bg-darkBg dark:text-white transition duration-300  py-2 px-4 rounded-md"
+            className="lg:hidden hidden md:flex border-2 border-darkBg dark:border-lightBg font-bold bg-lightBg text-black dark:bg-darkBg dark:text-white transition duration-300 py-2 px-4 rounded-md"
           >
             Characters
           </button>
@@ -77,7 +78,7 @@ function Header({
           <ul
             className={`${
               isDropdownOpen ? "block" : "hidden"
-            } absolute right-0 mt-2 py-2 w-48 bg-lightBg  text-black dark:bg-darkBg dark:text-white rounded-lg shadow-lg lg:hidden`}
+            } absolute right-0 mt-2 py-2 w-48 bg-lightBg text-black dark:bg-darkBg dark:text-white rounded-lg shadow-lg lg:hidden`}
           >
             {characters.map((character) => (
               <li
@@ -86,23 +87,34 @@ function Header({
                   color: character.found ? "green" : "",
                 }}
                 aria-label={character.name}
-                className="px-4 py-2"
+                className="px-4 py-2 rounded-bg flex items-center gap-2"
               >
+                <img
+                  src={character.characterImageUrl}
+                  alt={`${character.name} character`}
+                  className="w-8 h-8"
+                />
                 {character.name}
               </li>
             ))}
           </ul>
 
-          <ul className="hidden lg:flex gap-2 font-bold text-yellow-500 dark:text-yellow-300 ">
+          <ul className="hidden lg:flex gap-2 font-bold text-yellow-500 dark:text-yellow-300">
             {characters.map((character) => (
-              <li
-                key={character.name}
-                style={{
-                  color: character.found ? "green" : "",
-                }}
-                aria-label={character.name}
-              >
-                {character.name}
+              <li key={character.name} className="flex items-center gap-2">
+                <img
+                  src={character.characterImageUrl}
+                  alt={`${character.name} character`}
+                  className="cursor-pointer rounded-lg w-16 h-16  hover:scale-110 transform transition duration-300"
+                />
+                <span
+                  style={{
+                    color: character.found ? "green" : "",
+                  }}
+                  aria-label={character.name}
+                >
+                  {character.name}
+                </span>
               </li>
             ))}
           </ul>

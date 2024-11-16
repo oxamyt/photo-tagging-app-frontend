@@ -55,22 +55,31 @@ function Dropdown({ boxPosition, handleCharacterClick }) {
         }`}
       >
         {characters.map((character) => (
-          <li
-            key={character.name}
-            className={`text-xs md:text-xl lg:text-2xl font-semibold  ${
-              character.found
-                ? "text-stone-600"
-                : "text-yellow-500 dark:text-yellow-300"
-            } cursor-pointer transition duration-150`}
-            onClick={
-              character.found
-                ? null
-                : () => handleCharacterClick(character.name)
-            }
-            aria-label={character.name}
-          >
-            {character.name}
-          </li>
+          <div className="flex" key={character.name}>
+            <img
+              src={character.characterImageUrl}
+              alt={`${character.name} character`}
+              className={`cursor-pointer rounded-lg w-6 h-6 md:w-8 md:h-8 lg:w-10 lg:h-10 ${
+                character.found ? "grayscale" : ""
+              }  transition duration-300`}
+            />
+            <li
+              key={character.name}
+              className={`text-xs md:text-xl lg:text-2xl font-semibold  ${
+                character.found
+                  ? "text-stone-600"
+                  : "text-yellow-500 dark:text-yellow-300"
+              } cursor-pointer transition duration-150`}
+              onClick={
+                character.found
+                  ? null
+                  : () => handleCharacterClick(character.name)
+              }
+              aria-label={character.name}
+            >
+              {character.name}
+            </li>
+          </div>
         ))}
       </ul>
     </div>
