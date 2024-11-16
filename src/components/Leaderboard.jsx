@@ -37,21 +37,25 @@ function Leaderboard() {
       {error && <p className="text-lg text-red-600">{error}</p>}
 
       {leaderboardData && (
-        <div className="w-full max-w-4xl bg-lightBg text-black dark:text-white dark:bg-darkBg rounded-lg shadow-md overflow-hidden">
+        <div className="w-full  transition duration-300 max-w-4xl bg-lightBg text-black dark:text-white dark:bg-darkBg rounded-lg shadow-md overflow-hidden">
           <div className="flex justify-between items-center p-4 text-black dark:text-white text-sm  font-semibold">
             <span className="flex-1">Player</span>
-            <span className="text-right">Time</span>
+            <span className="flex-1 pr-10">Time</span>
+            <span className="pr-1">Date</span>
           </div>
           <ul className="divide-y divide-gray-200">
-            {leaderboardData.map((player) => (
-              <li
-                key={player.id}
-                className="flex justify-between items-center p-4 hover:text-yellow-500 hover:dark:text-yellow-400"
-              >
-                <span className="flex-1 ">{player.user}</span>
-                <span className="">{player.time}s</span>
-              </li>
-            ))}
+            {leaderboardData.map((player) => {
+              return (
+                <li
+                  key={player.id}
+                  className="flex justify-evenly items-center p-4 hover:text-yellow-500 hover:dark:text-yellow-400"
+                >
+                  <span className="flex-1 ">{player.user}</span>
+                  <span className="flex-1">{player.time}s</span>
+                  <span>{new Date(player.createdAt).toLocaleDateString()}</span>
+                </li>
+              );
+            })}
           </ul>
         </div>
       )}

@@ -38,7 +38,8 @@ function Header({
           to={"/"}
           className="font-bold  hover:text-yellow-500 hover:dark:text-yellow-300 transition duration-300"
         >
-          SpotQuest
+          Spo<span className="text-yellow-500 dark:text-yellow-300">t</span>Ques
+          <span className="text-yellow-500 dark:text-yellow-300">t</span>
         </Link>
       </div>
       {renderTimer ? (
