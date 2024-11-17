@@ -37,7 +37,7 @@ function Leaderboard() {
       {error && <p className="text-lg text-red-600">{error}</p>}
 
       {leaderboardData && (
-        <div className="w-full  transition duration-300 max-w-4xl bg-lightBg text-black dark:text-white dark:bg-darkBg rounded-lg shadow-md overflow-hidden">
+        <main className="w-full  transition duration-300 max-w-4xl bg-lightBg text-black dark:text-white dark:bg-darkBg rounded-lg shadow-md overflow-hidden">
           <div className="flex justify-between items-center p-4 text-black dark:text-white text-sm  font-semibold">
             <span className="flex-1">Player</span>
             <span className="flex-1 pr-10">Time</span>
@@ -57,7 +57,7 @@ function Leaderboard() {
               );
             })}
           </ul>
-        </div>
+        </main>
       )}
     </div>
   );

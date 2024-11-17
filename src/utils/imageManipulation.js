@@ -45,7 +45,7 @@ export const handleCharacterClick = async (
     );
 
     if (response.success) {
-      const img = document.querySelector("img");
+      const img = document.querySelector(".game-image");
 
       const { displayedX, displayedY } = calculateMark(
         img,

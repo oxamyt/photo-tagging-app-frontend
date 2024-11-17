@@ -67,7 +67,7 @@ function PhotoDisplay() {
         <img
           src={gameState.image}
           alt="game image"
-          className="cursor-pointer w-screen h-auto z-10"
+          className="cursor-pointer w-screen h-auto z-10 game-image"
           onClick={(e) => handleImageClick(e, gameState, setGameState)}
         />
         {gameState.showTargetingBox && (
