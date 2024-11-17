@@ -6,7 +6,7 @@ export async function postCoordinatesRequest(coordinates, characterName) {
   const response = await fetch(`${API_URL}/game`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    credentials: "same-origin",
+    credentials: "include",
     body: JSON.stringify(data),
   });
 
@@ -84,7 +84,6 @@ export async function getLeaderboard() {
   try {
     const response = await fetch(`${API_URL}/leaderboard`, {
       method: "GET",
-      headers: { "Content-Type": "application/json" },
       credentials: "include",
     });
     if (!response.ok) {
