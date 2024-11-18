@@ -23,7 +23,7 @@ function Leaderboard() {
   }, []);
 
   return (
-    <div className="w-full bg-lightBg text-black dark:text-white dark:bg-darkBg  min-h-screen flex flex-col items-center justify-center transition duration-300 p-6">
+    <div className="w-full bg-lightBg text-black dark:text-white dark:bg-darkBg min-h-screen flex flex-col items-center justify-center transition duration-300 p-6">
       <h1 className="text-3xl font-bold text-black dark:text-white mb-6">
         Leaderboard
       </h1>
@@ -37,8 +37,8 @@ function Leaderboard() {
       {error && <p className="text-lg text-red-600">{error}</p>}
 
       {leaderboardData && (
-        <main className="w-full  transition duration-300 max-w-4xl bg-lightBg text-black dark:text-white dark:bg-darkBg rounded-lg shadow-md overflow-hidden">
-          <div className="flex justify-between items-center p-4 text-black dark:text-white text-sm  font-semibold">
+        <main className="w-full transition duration-300 max-w-4xl bg-lightBg text-black dark:text-white dark:bg-darkBg rounded-lg shadow-md overflow-hidden">
+          <div className="flex justify-between items-center p-4 text-black dark:text-white text-sm font-semibold">
             <span className="flex-1">Player</span>
             <span className="flex-1 pr-10">Time</span>
             <span className="pr-1">Date</span>
@@ -50,8 +50,10 @@ function Leaderboard() {
                   key={player.id}
                   className="flex justify-evenly items-center p-4 hover:text-yellow-500 hover:dark:text-yellow-400"
                 >
-                  <span className="flex-1 ">{player.user}</span>
-                  <span className="flex-1">{player.time}s</span>
+                  <span className="flex-1">{player.user}</span>
+                  <span className="flex-1">
+                    {(player.time / 1000).toFixed(3)}s
+                  </span>
                   <span>{new Date(player.createdAt).toLocaleDateString()}</span>
                 </li>
               );

@@ -6,7 +6,7 @@ export async function postCoordinatesRequest(coordinates, characterName) {
   const response = await fetch(`${API_URL}/game`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    credentials: "same-origin",
+    credentials: "include",
     body: JSON.stringify(data),
   });
 
@@ -35,9 +35,9 @@ export async function postStartTimerRequest() {
   }
 }
 
-export async function postStopTimerRequest(clientEndTime) {
+export async function postStopTimerRequest(clientTotalTime) {
   try {
-    const data = { clientEndTime };
+    const data = { clientTotalTime };
     const response = await fetch(`${API_URL}/timer/end`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },

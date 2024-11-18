@@ -18,17 +18,28 @@ function Timer({ gameStarted, time, setTime, gameOver }) {
 
   useEffect(() => {
     if (gameStarted && !gameOver) {
-      const intervalId = setInterval(() => {
-        setTime((prevTime) => prevTime + 10);
-      }, 10);
+      const start = Date.now();
+      const interval = 10;
+      let timeoutId;
+
+      const step = () => {
+        const elapsed = Date.now() - start;
+
+        setTime(elapsed);
+        const drift = elapsed % interval;
+
+        timeoutId = setTimeout(step, Math.max(0, interval - drift));
+      };
+
+      step();
 
       return () => {
-        clearInterval(intervalId);
+        clearTimeout(timeoutId);
       };
     }
   }, [gameStarted, setTime, gameOver]);
 
-  return <div className=" w-64 ">{convertTime()}</div>;
+  return <div className="w-64">{convertTime()}</div>;
 }
 
 Timer.propTypes = {

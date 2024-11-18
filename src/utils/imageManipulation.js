@@ -31,7 +31,8 @@ export const handleCharacterClick = async (
   gameState,
   setCharacters,
   setGameOver,
-  time
+  time,
+  setTime
 ) => {
   setGameState((prevState) => ({
     ...prevState,
@@ -75,7 +76,7 @@ export const handleCharacterClick = async (
         const updatedCharacters = prevCharacters.map((char) =>
           char.name === characterName ? { ...char, found: true } : char
         );
-        checkWin(updatedCharacters, setGameOver, setGameState, time);
+        checkWin(updatedCharacters, setGameOver, setGameState, time, setTime);
         return updatedCharacters;
       });
     } else {

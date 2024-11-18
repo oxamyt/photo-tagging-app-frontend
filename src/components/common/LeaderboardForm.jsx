@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { postRecordTimer } from "../../utils/api";
 import PropTypes from "prop-types";
-import { useNavigate } from "react-router-dom"; // Import useNavigate
+import { useNavigate } from "react-router-dom";
 
 function LeaderboardForm({ totalTime }) {
   const [username, setUsername] = useState("");
@@ -20,15 +20,15 @@ function LeaderboardForm({ totalTime }) {
       console.error(err);
     }
   };
-
+  const formattedTime = (totalTime / 1000).toFixed(3);
   return (
     <form
       className="flex flex-col transition duration-300 z-100 items-center w-full max-w-md fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-6 rounded-xl shadow-lg bg-lightBg text-black dark:bg-darkBg dark:text-white z-20 space-y-4"
       onSubmit={handleSubmit}
     >
       <h1 className="text-xl font-semibold text-center">
-        Your total time is {totalTime} seconds. Enter your username to submit
-        your result.
+        Your total time is {formattedTime} seconds. Enter your username to
+        submit your result.
       </h1>
       <label className="w-full text-lg">
         Username:

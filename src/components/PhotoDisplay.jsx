@@ -44,9 +44,8 @@ function PhotoDisplay() {
           image: gameData.image,
         }));
 
-        if (!gameOver) {
-          await postStartTimerRequest();
-        }
+        await postStartTimerRequest();
+
         setGameStarted(true);
       } catch (error) {
         console.error("Error fetching game data:", error);
@@ -81,7 +80,8 @@ function PhotoDisplay() {
                   gameState,
                   setCharacters,
                   setGameOver,
-                  time
+                  time,
+                  setTime
                 )
               }
               boxPosition={gameState.boxPosition}
