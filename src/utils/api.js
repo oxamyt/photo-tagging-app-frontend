@@ -84,7 +84,6 @@ export async function getLeaderboard() {
   try {
     const response = await fetch(`${API_URL}/leaderboard`, {
       method: "GET",
-      headers: { "Content-Type": "application/json" },
       credentials: "include",
     });
     if (!response.ok) {
