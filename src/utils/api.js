@@ -99,11 +99,14 @@ export async function getLeaderboard() {
   }
 }
 
-export async function getGameData() {
+export async function getGameData(pictureName) {
   try {
+    const data = { pictureName };
     const response = await fetch(`${API_URL}/game-data`, {
-      method: "GET",
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
       credentials: "include",
+      body: JSON.stringify(data),
     });
     if (!response.ok) {
       let errorMessage = "Failed to fetch game data";

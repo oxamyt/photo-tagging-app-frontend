@@ -32,12 +32,13 @@ function PhotoDisplay() {
     time,
     setTime,
     setGameStarted,
+    pictureName,
   ] = useOutletContext();
 
   useEffect(() => {
     const fetchGameData = async () => {
       try {
-        const gameData = await getGameData();
+        const gameData = await getGameData(pictureName);
         setCharacters(gameData.characters);
         setGameState((prev) => ({
           ...prev,

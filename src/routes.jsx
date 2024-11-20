@@ -16,8 +16,13 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: "/game",
-    element: <GameLayout />,
+    path: "/game1",
+    element: <GameLayout pictureName="Big" />,
+    children: [{ index: true, element: <PhotoDisplay /> }],
+  },
+  {
+    path: "/game2",
+    element: <GameLayout pictureName="Magic_Alley" />,
     children: [{ index: true, element: <PhotoDisplay /> }],
   },
   {

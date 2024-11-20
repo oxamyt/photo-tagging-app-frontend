@@ -2,8 +2,9 @@ import { Outlet } from "react-router-dom";
 import Header from "../Header";
 import Footer from "../Footer";
 import { useState } from "react";
+import PropTypes from "prop-types";
 
-function GameLayout() {
+function GameLayout({ pictureName }) {
   const [characters, setCharacters] = useState();
 
   const [gameOver, setGameOver] = useState(false);
@@ -31,11 +32,16 @@ function GameLayout() {
           time,
           setTime,
           setGameStarted,
+          pictureName,
         ]}
       />
       <Footer />
     </div>
   );
 }
+
+GameLayout.propTypes = {
+  pictureName: PropTypes.string,
+};
 
 export default GameLayout;
