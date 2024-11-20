@@ -55,7 +55,7 @@ function Dropdown({ boxPosition, handleCharacterClick }) {
         }`}
       >
         {characters.map((character) => (
-          <div className="flex" key={character.name}>
+          <div className="flex items-center" key={character.name}>
             <img
               src={character.characterImageUrl}
               alt={`${character.name} character`}
@@ -65,7 +65,7 @@ function Dropdown({ boxPosition, handleCharacterClick }) {
             />
             <li
               key={character.name}
-              className={`text-xs md:text-xl lg:text-2xl font-semibold  ${
+              className={`text-xs md:text-xl pl-2 text-center lg:text-2xl font-semibold  ${
                 character.found
                   ? "text-stone-600"
                   : "text-yellow-500 dark:text-yellow-300"
