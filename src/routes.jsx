@@ -6,25 +6,25 @@ import Homepage from "./components/Homepage.jsx";
 import Leaderboard from "./components/Leaderboard.jsx";
 import NotFound from "./components/NotFound.jsx";
 
+const gameRoutes = [
+  { path: "game1", pictureName: "Big" },
+  { path: "game2", pictureName: "Magic_Alley" },
+];
+
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
     children: [
       { index: true, element: <Homepage /> },
-      { path: "/leaderboard", element: <Leaderboard /> },
+      { path: "leaderboard", element: <Leaderboard /> },
     ],
   },
-  {
-    path: "/game1",
-    element: <GameLayout pictureName="Big" />,
+  ...gameRoutes.map((game) => ({
+    path: `/${game.path}`,
+    element: <GameLayout pictureName={game.pictureName} />,
     children: [{ index: true, element: <PhotoDisplay /> }],
-  },
-  {
-    path: "/game2",
-    element: <GameLayout pictureName="Magic_Alley" />,
-    children: [{ index: true, element: <PhotoDisplay /> }],
-  },
+  })),
   {
     path: "*",
     element: <NotFound />,
