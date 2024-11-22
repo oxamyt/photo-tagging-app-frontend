@@ -80,11 +80,29 @@ export async function postRecordTimer(data) {
   }
 }
 
-export async function getLeaderboard() {
+export async function getImages() {
   try {
     const response = await fetch(`${API_URL}/leaderboard`, {
       method: "GET",
       credentials: "include",
+    });
+
+    const imagesData = await response.json();
+
+    return imagesData;
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+export async function postLeaderboard(imageId) {
+  try {
+    const data = { imageId };
+    const response = await fetch(`${API_URL}/leaderboard/records`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      credentials: "include",
+      body: JSON.stringify(data),
     });
     if (!response.ok) {
       let errorMessage = "Failed to fetch leaderboard";

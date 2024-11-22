@@ -1,17 +1,19 @@
 import { useEffect, useState } from "react";
-import { getLeaderboard } from "../utils/api";
+import { postLeaderboard, getImages } from "../utils/api";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
 function Leaderboard() {
   const [leaderboardData, setLeaderboardData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [images, setImages] = useState([]);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fetchLeaderboard = async () => {
+    const fetchImages = async () => {
       try {
-        const response = await getLeaderboard();
-        setLeaderboardData(response);
+        const response = await getImages();
+
+        setImages(response.Images);
         setLoading(false);
       } catch (err) {
         setError(err);
@@ -19,8 +21,21 @@ function Leaderboard() {
       }
     };
 
-    fetchLeaderboard();
+    fetchImages();
   }, []);
+
+  const fetchLeaderboard = async (imageId) => {
+    setLoading(true);
+    try {
+      const response = await postLeaderboard(imageId);
+      console.log(response);
+      setLeaderboardData(response);
+      setLoading(false);
+    } catch (err) {
+      setError(err);
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="w-full bg-lightBg text-black dark:text-white dark:bg-darkBg min-h-screen flex flex-col items-center justify-center transition duration-300 p-6">
@@ -35,6 +50,25 @@ function Leaderboard() {
       )}
 
       {error && <p className="text-lg text-red-600">{error}</p>}
+
+      {images.length > 0 && (
+        <div className="w-full flex flex-wrap justify-center gap-4 mb-8">
+          {images.map((image) => (
+            <div
+              key={image.id}
+              onClick={() => fetchLeaderboard(image.id)}
+              className="text-center"
+            >
+              <h1 className="text-xl font-semibold">{image.name}</h1>
+              <img
+                src={image.url}
+                alt={image.name}
+                className="w-32 h-32 object-cover rounded-md"
+              />
+            </div>
+          ))}
+        </div>
+      )}
 
       {leaderboardData && (
         <main className="w-full transition duration-300 max-w-4xl bg-lightBg text-black dark:text-white dark:bg-darkBg rounded-lg shadow-md overflow-hidden">

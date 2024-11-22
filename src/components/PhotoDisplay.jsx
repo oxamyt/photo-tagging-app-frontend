@@ -21,7 +21,7 @@ function PhotoDisplay() {
     showPopup: false,
     foundCharacter: null,
     totalTime: null,
-    image: null,
+    image: {},
   });
 
   const [
@@ -44,7 +44,7 @@ function PhotoDisplay() {
           ...prev,
           image: gameData.image,
         }));
-
+        console.log(gameData.image);
         await postStartTimerRequest();
 
         setGameStarted(true);
@@ -65,7 +65,7 @@ function PhotoDisplay() {
           </div>
         )}
         <img
-          src={gameState.image}
+          src={gameState.image.url}
           alt="game image"
           className="cursor-pointer h-screen w-screen lg:h-auto z-10 game-image"
           onClick={(e) => handleImageClick(e, gameState, setGameState)}
@@ -107,7 +107,10 @@ function PhotoDisplay() {
         {gameOver && (
           <>
             <div className="fixed inset-0 bg-black opacity-50" />
-            <LeaderboardForm totalTime={gameState.totalTime} />
+            <LeaderboardForm
+              totalTime={gameState.totalTime}
+              imageId={gameState.image.id}
+            />
           </>
         )}
       </div>
