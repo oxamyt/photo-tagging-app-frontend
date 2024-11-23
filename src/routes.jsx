@@ -9,6 +9,7 @@ import NotFound from "./components/NotFound.jsx";
 const gameRoutes = [
   { path: "game1", pictureName: "Big" },
   { path: "game2", pictureName: "Magic_Alley" },
+  { path: "game3", pictureName: "Game" },
 ];
 
 const router = createBrowserRouter([
