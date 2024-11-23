@@ -44,7 +44,7 @@ function PhotoDisplay() {
           ...prev,
           image: gameData.image,
         }));
-        console.log(gameData.image);
+
         await postStartTimerRequest();
 
         setGameStarted(true);

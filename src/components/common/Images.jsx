@@ -11,6 +11,7 @@ function Images({
     <div className="w-ful cursor-pointer grid grid-cols-2   justify-center gap-4 mb-8">
       {images.map((image) => (
         <div
+          className="hover:scale-105 hover:text-yellow-500 hover:dark:text-yellow-300 duration-300"
           key={image.id}
           onClick={() =>
             fetchLeaderboard(image.id, setLoading, setLeaderboardData, setError)
