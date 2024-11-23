@@ -12,7 +12,6 @@ function Homepage() {
     const fetchImages = async () => {
       try {
         const response = await getImages();
-
         setImages(response.Images);
         setLoading(false);
       } catch (err) {
@@ -26,12 +25,17 @@ function Homepage() {
 
   return (
     <main className="w-full text-black dark:text-white  bg-lightBg grow dark:bg-darkBg  flex flex-col items-center justify-center transition duration-300">
-      <h1 className="text-black dark:text-white  text-3xl lg:text-4xl font-bold text-center  mb-8">
-        Welcome to the SpotQuest!
-      </h1>
-      <h1 className="text-yellow-500 dark:text-yellow-300  text-3xl lg:text-4xl font-bold text-center  mb-8">
-        Choose your game
-      </h1>
+      {!loading && (
+        <>
+          {" "}
+          <h1 className="text-black dark:text-white  text-3xl lg:text-4xl font-bold text-center  mb-8">
+            Welcome to the SpotQuest!
+          </h1>
+          <h1 className="text-yellow-500 dark:text-yellow-300  text-3xl lg:text-4xl font-bold text-center  mb-8">
+            Choose your game
+          </h1>{" "}
+        </>
+      )}
 
       {loading && (
         <div className="flex items-center justify-center w-full h-screen">

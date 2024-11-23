@@ -59,7 +59,7 @@ function PhotoDisplay() {
   return (
     <main className="w-full">
       <div className="relative">
-        {!gameState.image && (
+        {!gameState.image.url && (
           <div className="flex items-center justify-center w-screen h-screen ">
             <AiOutlineLoading3Quarters className="animate-spin h-16 w-16 text-gray-500" />
           </div>
