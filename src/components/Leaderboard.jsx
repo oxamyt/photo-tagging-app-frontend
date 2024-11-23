@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
-import { postLeaderboard, getImages } from "../utils/api";
+import { getImages } from "../utils/api";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import fetchLeaderboard from "../utils/fetchLeaderboard";
+import Images from "./common/Images";
 
 function Leaderboard() {
   const [leaderboardData, setLeaderboardData] = useState(null);
@@ -22,23 +24,11 @@ function Leaderboard() {
     };
 
     fetchImages();
+    fetchLeaderboard(1, setLoading, setLeaderboardData, setError);
   }, []);
 
-  const fetchLeaderboard = async (imageId) => {
-    setLoading(true);
-    try {
-      const response = await postLeaderboard(imageId);
-      console.log(response);
-      setLeaderboardData(response);
-      setLoading(false);
-    } catch (err) {
-      setError(err);
-      setLoading(false);
-    }
-  };
-
   return (
-    <div className="w-full bg-lightBg text-black dark:text-white dark:bg-darkBg min-h-screen flex flex-col items-center justify-center transition duration-300 p-6">
+    <div className=" bg-lightBg text-black dark:text-white dark:bg-darkBg min-h-screen flex flex-col  items-center transition duration-300 p-6">
       <h1 className="text-3xl font-bold text-black dark:text-white mb-6">
         Leaderboard
       </h1>
@@ -52,22 +42,13 @@ function Leaderboard() {
       {error && <p className="text-lg text-red-600">{error}</p>}
 
       {images.length > 0 && (
-        <div className="w-full flex flex-wrap justify-center gap-4 mb-8">
-          {images.map((image) => (
-            <div
-              key={image.id}
-              onClick={() => fetchLeaderboard(image.id)}
-              className="text-center"
-            >
-              <h1 className="text-xl font-semibold">{image.name}</h1>
-              <img
-                src={image.url}
-                alt={image.name}
-                className="w-32 h-32 object-cover rounded-md"
-              />
-            </div>
-          ))}
-        </div>
+        <Images
+          images={images}
+          fetchLeaderboard={fetchLeaderboard}
+          setLoading={setLoading}
+          setLeaderboardData={setLeaderboardData}
+          setError={setError}
+        />
       )}
 
       {leaderboardData && (
