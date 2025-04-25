@@ -4,19 +4,18 @@ const checkWin = async (
   updatedCharacters,
   setGameOver,
   setGameState,
-  time,
-  setTime
+  setTime,
+  id
 ) => {
   const allFound = updatedCharacters.every((character) => character.found);
 
   if (allFound) {
     setGameOver(true);
-    const stopTime = time;
-    const response = await postStopTimerRequest(stopTime);
-    setTime(stopTime);
+    const { elapsedTime } = await postStopTimerRequest(id);
+    setTime(elapsedTime);
     setGameState((prevState) => ({
       ...prevState,
-      totalTime: response.elapsedTime,
+      totalTime: elapsedTime,
     }));
   }
 };

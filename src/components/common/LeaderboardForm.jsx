@@ -3,14 +3,14 @@ import { postRecordTimer } from "../../utils/api";
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 
-function LeaderboardForm({ totalTime, imageId }) {
+function LeaderboardForm({ totalTime, imageId, id }) {
   const [username, setUsername] = useState("");
   const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const data = { username, imageId };
+    const data = { username, imageId, id };
 
     try {
       await postRecordTimer(data);
@@ -53,6 +53,7 @@ function LeaderboardForm({ totalTime, imageId }) {
 LeaderboardForm.propTypes = {
   totalTime: PropTypes.number,
   imageId: PropTypes.number,
+  id: PropTypes.string,
 };
 
 export default LeaderboardForm;

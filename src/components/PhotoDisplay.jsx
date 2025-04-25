@@ -22,6 +22,7 @@ function PhotoDisplay() {
     foundCharacter: null,
     totalTime: null,
     image: {},
+    id: null,
   });
 
   const [
@@ -40,13 +41,13 @@ function PhotoDisplay() {
       try {
         const gameData = await getGameData(pictureName);
         setCharacters(gameData.characters);
+        const { id } = await postStartTimerRequest();
+        console.log(id);
         setGameState((prev) => ({
           ...prev,
           image: gameData.image,
+          id,
         }));
-
-        await postStartTimerRequest();
-
         setGameStarted(true);
       } catch (error) {
         console.error("Error fetching game data:", error);
@@ -82,7 +83,8 @@ function PhotoDisplay() {
                   setCharacters,
                   setGameOver,
                   time,
-                  setTime
+                  setTime,
+                  gameState.id
                 )
               }
               boxPosition={gameState.boxPosition}
@@ -110,6 +112,7 @@ function PhotoDisplay() {
             <LeaderboardForm
               totalTime={gameState.totalTime}
               imageId={gameState.image.id}
+              id={gameState.id}
             />
           </>
         )}

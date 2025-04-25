@@ -76,7 +76,13 @@ export const handleCharacterClick = async (
         const updatedCharacters = prevCharacters.map((char) =>
           char.name === characterName ? { ...char, found: true } : char
         );
-        checkWin(updatedCharacters, setGameOver, setGameState, time, setTime);
+        checkWin(
+          updatedCharacters,
+          setGameOver,
+          setGameState,
+          setTime,
+          gameState.id
+        );
         return updatedCharacters;
       });
     } else {

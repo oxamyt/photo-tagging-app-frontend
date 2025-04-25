@@ -30,19 +30,18 @@ export async function postStartTimerRequest() {
 
       throw new Error(errorMessage);
     }
+    return response.json();
   } catch (err) {
     console.error(err);
   }
 }
 
-export async function postStopTimerRequest(clientTotalTime) {
+export async function postStopTimerRequest(id) {
   try {
-    const data = { clientTotalTime };
     const response = await fetch(`${API_URL}/timer/end`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      credentials: "include",
-      body: JSON.stringify(data),
+      body: JSON.stringify({ id }),
     });
     if (!response.ok) {
       let errorMessage = "Failed to stop timer";
@@ -63,7 +62,6 @@ export async function postRecordTimer(data) {
     const response = await fetch(`${API_URL}/leaderboard`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      credentials: "include",
       body: JSON.stringify(data),
     });
     if (!response.ok) {
